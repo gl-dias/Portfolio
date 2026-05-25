@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Como matei 6 hipóteses de trading cripto · gl-dias.dev</title>
+  <meta name="description" content="Em 2 meses testei 6 hipóteses estruturalmente diferentes pra achar edge em majors retail de cripto. Refutei todas com walk-forward. Post-mortem honesto." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0A0B'/><circle cx='16' cy='16' r='5' fill='%23E8A040'/></svg>" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <span class="dot"></span>
+        gl-dias<span style="color: #56575E">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#projetos">projetos</a>
+        <a href="../index.html#writing">writing</a>
+        <a href="../index.html#sobre">sobre</a>
+        <a href="../index.html#contato">contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap post-page">
+    <a href="../index.html#writing" class="post-back">← voltar pra writing</a>
+
+    <header class="post-header">
+      <div class="post-meta">
+        <span class="post-meta-date">2026-05-25</span>
+        <span class="post-meta-sep">·</span>
+        <span>writing</span>
+        <span class="post-meta-sep">·</span>
+        <span>~6 min</span>
+      </div>
+      <h1>Como matei 6 hipóteses de trading cripto e parei no tempo certo</h1>
+      <p class="post-lede">
+        Em 2 meses testei 6 hipóteses estruturalmente diferentes pra achar edge em majors retail
+        de cripto. Refutei todas com walk-forward. Parei no tempo certo. Esse post é o método
+        que sobrou.
+      </p>
+    </header>
+
+    <article class="post-content">
+      <h2>O setup</h2>
+      <p>
+        Comecei com uma estratégia legada (EMA 9/21 crossover) refatorada pra arquitetura
+        conservadora de 3 camadas: análise técnica, machine learning, e um juiz LLM no fim.
+        Universo de 10 moedas (BTC, ETH, SOL, BNB, XRP, ADA, AVAX, DOGE, DOT, LINK).
+        Gestão de risco apertada: 0,4% do capital por trade, cap diário de ±0,8%, no máximo
+        3 posições simultâneas, e 2 perdas consecutivas encerram o dia.
+      </p>
+      <p>
+        Stack: Python 3.11, <code>ccxt</code> pra Binance, indicadores na mão
+        (EMA, RSI, ATR, ADX, Bollinger). XGBoost na camada ML, anthropic SDK no juiz.
+        Sem <code>ta-lib</code>, sem <code>pandas-ta</code> — controle total da fórmula
+        e zero dependência nativa pesada.
+      </p>
+
+      <h2>O gate: walk-forward 70/30</h2>
+      <p>
+        Antes de promover qualquer hipótese pra dry-run, ela tinha que passar por
+        walk-forward IS/OOS 70/30 com critérios fechados:
+      </p>
+      <ul>
+        <li>Sharpe IS ≥ 0,8</li>
+        <li>≥ 85 trades no período</li>
+        <li>Profit Factor ≥ 0,85</li>
+        <li>Max Drawdown ≤ 15%</li>
+        <li>Sharpe OOS ≥ 0,5</li>
+      </ul>
+      <p>
+        Sem isso, não rodava nem no testnet. Critério fechado antes do teste é o que
+        separa validação de p-hacking.
+      </p>
+
+      <h2>Os 6 testes</h2>
+
+      <h3>H1 — EMA 9/21 crossover (legada)</h3>
+      <p>
+        91 dias de backtest. Sharpe <strong>−12,6</strong>. Retorno
+        <strong>−22,85%</strong> vs −7,52% do buy-and-hold. Win rate 13,4%.
+        0 dos 10 pares positivos. <strong>Refutada.</strong>
+      </p>
+
+      <h3>H2 — Mesma estratégia, invertida (SHORT espelhado)</h3>
+      <p>
+        Hipótese: se a entrada LONG perde, a saída SHORT ganha. Não. O mercado não é
+        simétrico em torno do sinal. <strong>Refutada.</strong>
+      </p>
+
+      <h3>H3 — Mean reversion explícita</h3>
+      <p>
+        RSI overbought + bearish candle, sem trend filter. Mesma família estatística,
+        mesmo destino. <strong>Refutada.</strong>
+      </p>
+
+      <p class="post-aside">
+        Resultado da família EMA + RSI + volume: refutada em <code>2026-05-01</code>.
+        Hora de mudar de família.
+      </p>
+
+      <h3>H4 — Funding rate extremo (>0,05% × 3 settlements)</h3>
+      <p>
+        Sinal raro: apenas 9 eventos em 91 dias × 10 pares, todos em DOT.
+        Calibração relaxada (0,01% × 3) gerou 109 eventos com EV +0,122% líquido —
+        edge marginal e mecanismo descaracterizado. <strong>Descartada antes de gastar
+        slot de walk-forward.</strong>
+      </p>
+
+      <h3>H5 — Cointegração formal Engle-Granger ETH/BTC (Z-score >|2σ|)</h3>
+      <p>
+        ADF <code>p&lt;0,10</code> em apenas 36% do período (vs critério ≥70%).
+        β oscila 0,67-1,37. Apenas 2 eventos válidos.
+        <strong>Descartada antes de walk-forward.</strong>
+      </p>
+
+      <h3>H6 — Funding settlement timing (00/08/16 UTC)</h3>
+      <p>
+        Sinal direcional real existe: funding negativo → +0,083% pós-settlement;
+        funding positivo → −0,113%. Mas a magnitude é 3-6× menor que round-trip cost
+        de 0,30%. <strong>Sinal real mas economicamente irrelevante.</strong>
+      </p>
+
+      <p>
+        Total: 6 hipóteses em famílias estruturalmente diferentes (técnica simples +
+        funding rate + cointegração + eventos calendar). <strong>0 aprovadas.</strong>
+      </p>
+
+      <h2>A pergunta utilitária</h2>
+      <p>
+        Quando bateu a 6ª falha, parei e fiz uma pergunta básica:
+        <em>bot $500/mês com 0h de manutenção, ou SaaS de trading $2k/mês com 10h/mês?</em>
+      </p>
+      <p>
+        A resposta foi clara: <strong>bot $500 com 0h</strong>. Renda passiva era o
+        objetivo real, não ownership de produto. Os consultores que recomendavam
+        pivot pra SaaS estavam respondendo à pergunta errada — porque eu nunca tinha
+        explicitado qual era a minha.
+      </p>
+      <p>
+        A maioria das decisões "técnicas" é decisão de função-utilidade mal formulada.
+        Quando você não sabe o que tá maximizando, qualquer recomendação serve.
+      </p>
+
+      <h2>O que ganhei</h2>
+      <p>Sem edge, fica fácil dizer que perdi tempo. Não perdi.</p>
+      <ul>
+        <li>
+          <strong>Framework de validação de hipóteses</strong> (<code>phase1_runner.py</code>):
+          aceita qualquer hipótese nova com 1 comando, faz split IS/OOS e aplica
+          critérios fechados. Reutilizável fora de cripto.
+        </li>
+        <li>
+          <strong>5 bugs operacionais corrigidos</strong> — position sizing errado,
+          TP/SL pós-fill, drawdown guard, sanitização de log. Pré-requisitos de
+          qualquer deploy futuro.
+        </li>
+        <li>
+          <strong>Convergência forte de 4 fontes independentes</strong> (Council interno
+          + 3 especialistas externos): majors cripto retail está estéril no regime atual.
+          Saber isso vale mais que continuar tentando.
+        </li>
+        <li>
+          <strong>Uma função-utilidade explicitada</strong> que vou usar em decisões
+          futuras.
+        </li>
+      </ul>
+
+      <h2>Por que parei aqui</h2>
+      <p>
+        Não é desistência. É decisão consciente com evidência cumulativa. Continuar
+        gastando slot de hipótese no mesmo regime é <em>p-hacking de dimensionalidade</em>:
+        eventualmente eu acho algo que passa por sorte, não por edge real.
+      </p>
+      <p>
+        O dataset com 74.769 sinais labeled tá pronto pra Kaggle. A biblioteca standalone
+        <code>cryptobacktest.py</code> (~400 LoC, walk-forward built-in, MIT) tá pronta
+        pra GitHub. Esses entregam valor independente do edge. Mas não vou ativar agora —
+        o objetivo era renda passiva, não virar open-source maintainer.
+      </p>
+
+      <h2>O que isso ensina</h2>
+      <ol>
+        <li>
+          <strong>Defina a função-utilidade primeiro.</strong> Sem isso, conselho
+          técnico fica ambíguo e qualquer rota parece razoável.
+        </li>
+        <li>
+          <strong>Gate fechado antes do teste.</strong> Critérios numéricos definidos
+          antes de olhar resultado evitam p-hacking.
+        </li>
+        <li>
+          <strong>Hipótese morta cedo &gt; produto vivo sem edge.</strong> Refutar
+          uma ideia ruim no papel é mais barato que descobrir ela quebrada em produção.
+        </li>
+        <li>
+          <strong>Falha sistemática é dado, não fracasso.</strong> 6/6 refutadas em
+          famílias diferentes é informação forte sobre o regime, não sobre minha
+          competência.
+        </li>
+      </ol>
+
+      <p class="post-close">
+        O bot tá pausado, esperando ou o regime mudar ou minha função-utilidade mudar.
+        Os dois critérios estão documentados. Sem ambos, fica como está.
+      </p>
+    </article>
+
+    <footer class="post-footer">
+      <a href="../index.html#writing" class="post-back">← voltar pra writing</a>
+      <span class="post-footer-sig">guilherme dias batista · 2026</span>
+    </footer>
+  </main>
+</body>
+</html>

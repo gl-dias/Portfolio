@@ -274,6 +274,15 @@ p { color: var(--text-dim); }
 .proj-meta .stack { color: var(--text-dim); }
 .proj-meta .stack-label { color: var(--text-faint); margin-right: 4px; }
 
+/* ---------- project tagline (linha didática pra leigo) ---------- */
+.proj-tagline {
+  color: var(--text);
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  margin-top: 2px;
+  max-width: 620px;
+}
+
 /* ---------- writing list ---------- */
 .writing { display: flex; flex-direction: column; }
 .post {
@@ -391,11 +400,154 @@ p { color: var(--text-dim); }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.04); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.1); }
 
-/* ---------- responsive ---------- */
+/* ============================================================
+   post page (posts/*.html)
+   ============================================================ */
+
+.post-page {
+  padding: 64px 32px 80px;
+  max-width: 680px;
+}
+
+.post-back {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-bottom: 32px;
+  transition: color 200ms, transform 200ms;
+}
+.post-back:hover {
+  color: var(--accent);
+  transform: translateX(-3px);
+}
+
+.post-header {
+  margin-bottom: 48px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.post-meta {
+  display: flex;
+  gap: 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11.5px;
+  color: var(--text-faint);
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.post-meta-date { color: var(--accent); }
+.post-meta-sep { color: rgba(255,255,255,0.15); }
+
+.post-page h1 {
+  font-size: 36px;
+  line-height: 1.18;
+  letter-spacing: -0.028em;
+  margin-bottom: 22px;
+}
+
+.post-lede {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text);
+  max-width: 620px;
+}
+
+.post-content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
+.post-content h2 {
+  font-size: 22px;
+  color: var(--text);
+  margin: 44px 0 14px;
+  letter-spacing: -0.018em;
+}
+.post-content h2:first-child { margin-top: 0; }
+
+.post-content h3 {
+  font-size: 17px;
+  color: var(--text);
+  margin: 32px 0 10px;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+}
+
+.post-content p { margin-bottom: 16px; }
+.post-content p:last-child { margin-bottom: 0; }
+
+.post-content strong { color: var(--text); font-weight: 500; }
+.post-content em { font-style: italic; color: var(--accent); }
+
+.post-content ul,
+.post-content ol {
+  margin: 0 0 20px 0;
+  padding-left: 22px;
+}
+.post-content li {
+  margin-bottom: 8px;
+}
+.post-content li::marker { color: var(--text-faint); }
+
+.post-content code {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  background: rgba(232, 160, 64, 0.08);
+  border: 1px solid rgba(232, 160, 64, 0.18);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.post-content .post-aside {
+  padding: 12px 16px;
+  border-left: 2px solid var(--accent);
+  background: rgba(232, 160, 64, 0.04);
+  color: var(--text);
+  margin: 24px 0;
+  font-size: 15px;
+  border-radius: 0 6px 6px 0;
+}
+
+.post-content .post-close {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  color: var(--text);
+  font-style: italic;
+}
+
+.post-footer {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.post-footer-sig {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+/* ============================================================
+   responsive
+   ============================================================ */
 @media (max-width: 600px) {
   .wrap, .nav-inner { padding-left: 22px; padding-right: 22px; }
   h1 { font-size: 30px; }
+  .post-page h1 { font-size: 26px; }
   .post { grid-template-columns: 78px 1fr auto; gap: 14px; }
   .contact-line { grid-template-columns: 88px 1fr; }
   .nav-links { gap: 16px; }
+  .post-page { padding: 44px 22px 60px; }
+  .post-content { font-size: 15px; }
 }

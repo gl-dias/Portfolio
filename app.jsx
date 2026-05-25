@@ -1,5 +1,5 @@
 /* eslint-disable */
-/* guilhermedias.dev — terminal honesto, dado em vez de hype */
+/* gl-dias.dev — terminal honesto, dado em vez de hype */
 
 const { useState, useEffect, useRef } = React;
 
@@ -64,14 +64,15 @@ function Hero() {
 
       <Fade delay={80}>
         <h1 className="hero-headline">
-          Construindo <em>SaaS B2B</em> e <em>agentes</em> com IA aplicada. Pelo caminho mais curto até a coisa certa.
+          Construindo <em>SaaS B2B</em>, <em>sites</em> e <em>automações com IA</em>. Pelo caminho mais curto até a coisa certa.
         </h1>
       </Fade>
 
       <Fade delay={160}>
         <p className="hero-sub">
-          Full-stack focado em produto. Ando no <strong>RdL</strong> (SaaS de editais públicos),
-          em sites pra clientes, e construindo um agente pessoal por voz.
+          Full-stack focado em produto. Faço <strong>SaaS B2B</strong> (RdL, plataforma de editais públicos),
+          <strong> sites pra clientes</strong> com captura de leads, e
+          <strong> automações com IA</strong> pra processo que se repete demais.
           Stack escolhida por contexto, não por hype.
         </p>
       </Fade>
@@ -86,34 +87,6 @@ function Hero() {
           </a>
         </div>
       </Fade>
-
-      <Fade delay={320}>
-        <div className="hero-meta">
-          <span>● dev full-stack</span>
-          <span>· rio de janeiro</span>
-          <span>· pt-br nativo</span>
-        </div>
-      </Fade>
-    </section>
-  );
-}
-
-/* ---------- princípio operacional ---------- */
-function Principle() {
-  return (
-    <section className="wrap principle">
-      <Fade>
-        <div className="eyebrow">princípio operacional</div>
-        <p className="principle-quote">
-          <em>Preguiça produtiva.</em> Não é evitar trabalho, é evitar <em>trabalho redundante</em>.
-          Refator que poupa 10 horas futuras &gt; script que roda uma vez.
-          Hipótese morta cedo &gt; produto vivo sem edge.
-        </p>
-        <p className="principle-body">
-          O Council interno (sistema de revisores que rodo antes de decisões irreversíveis) é a versão organizada disso:
-          deixar as ideias furadas serem refutadas no papel, não em produção.
-        </p>
-      </Fade>
     </section>
   );
 }
@@ -124,6 +97,7 @@ const PROJECTS = [
     name: "RdL",
     role: "lead",
     roleLabel: "founder · ativo",
+    tagline: "Software pra empresas que disputam editais do governo.",
     desc: "SaaS B2B de monitoramento de editais de licitação pública. Pipeline de ingestão de portais oficiais, normalização de modalidades, e alertas por critério de busca. Em construção, com cliente piloto.",
     stack: ["Next.js", "Supabase", "Postgres", "Python (ingestão)", "GitHub Actions"],
     status: "v0 em uso interno · MVP pra fechar Q2",
@@ -133,6 +107,7 @@ const PROJECTS = [
     name: "Site Prof. Luiz Barbieri",
     role: "client",
     roleLabel: "freela · entregue",
+    tagline: "Site profissional pra consultor de cursos, com captura automática de leads.",
     desc: "Site institucional do consultor Prof. Luiz Barbieri. Páginas de cursos, captura de leads e envio automático de materiais. No ar e iterando.",
     stack: ["HTML/CSS", "JS", "Apps Script", "Sheets como CMS"],
     status: "v1 publicada",
@@ -142,7 +117,8 @@ const PROJECTS = [
     name: "Site LFG Tech",
     role: "client",
     roleLabel: "freela · em desenvolvimento",
-    desc: "Site institucional da LFG Tech. Em construção, ainda não publicado. Link entra aqui quando o site for ao ar.",
+    tagline: "Site institucional pra empresa de tecnologia.",
+    desc: "Em construção, ainda não publicado. O link entra aqui quando o site for ao ar.",
     stack: ["HTML/CSS", "JS"],
     status: "em desenvolvimento",
     href: null,
@@ -151,7 +127,8 @@ const PROJECTS = [
     name: "Dias",
     role: "draft",
     roleLabel: "pessoal · planejado",
-    desc: "Agente delegador por voz pra uso próprio. Não é Alexa (só responde). É Jarvis: conversa, comenta, executa via Claude Code quando faz sentido. Vault Obsidian como contexto pessoal. Em planejamento detalhado, ainda não iniciado.",
+    tagline: "Assistente pessoal por voz que conversa e executa tarefas no computador.",
+    desc: "Pra uso próprio. Não responde só (como a Alexa) — executa via Claude Code quando faz sentido. Vault Obsidian como contexto pessoal. Em planejamento detalhado, ainda não iniciado.",
     stack: ["Python", "Claude API", "Whisper", "ChromaDB", "MCP"],
     status: "fase de plano · gate de início definido",
     href: null,
@@ -160,10 +137,12 @@ const PROJECTS = [
     name: "Bot de trading cripto",
     role: "paused",
     roleLabel: "pausado · case de método",
-    desc: "Engine algorítmica em 3 camadas (técnica + ML + juiz LLM). Testei 6 hipóteses estruturalmente diferentes, refutei todas com walk-forward. Pausado depois de provar que não havia edge no regime atual. Ver post no Writing.",
+    tagline: "Testei 6 hipóteses de trading rigorosamente, matei todas, parei no tempo certo.",
+    desc: "Engine em 3 camadas (técnica + ML + juiz LLM). 91 dias de walk-forward IS/OOS, 6 hipóteses estruturalmente diferentes refutadas. Pausado depois de provar que não havia edge no regime atual.",
     stack: ["Python", "ccxt", "XGBoost", "Claude API"],
-    status: "0 trades em prod · sharpe real testado, não mockado",
-    href: null,
+    status: "91 dias de walk-forward · 6 hipóteses refutadas · 0 trades em prod",
+    href: "posts/bot-cripto.html",
+    hrefLabel: "ler o post completo",
   },
 ];
 
@@ -175,6 +154,7 @@ function ProjectCard({ p, delay }) {
           <span className="proj-name">{p.name}</span>
           <span className={"proj-role " + p.role}>{p.roleLabel}</span>
         </div>
+        {p.tagline && <p className="proj-tagline">{p.tagline}</p>}
         <p className="proj-desc">{p.desc}</p>
         <div className="proj-meta">
           <span className="stack">
@@ -184,8 +164,8 @@ function ProjectCard({ p, delay }) {
           <span className="status">· {p.status}</span>
         </div>
         {p.href && (
-          <a className="proj-link" href={p.href} target="_blank" rel="noopener">
-            visitar site <span className="proj-link-arrow">↗</span>
+          <a className="proj-link" href={p.href} target={p.href.startsWith("http") ? "_blank" : "_self"} rel="noopener">
+            {p.hrefLabel || "visitar site"} <span className="proj-link-arrow">↗</span>
           </a>
         )}
       </div>
@@ -200,8 +180,8 @@ function Projects() {
         <div className="eyebrow">projetos selecionados</div>
         <h2 style={{ marginBottom: 8 }}>O que tenho em pé hoje.</h2>
         <p style={{ marginBottom: 28, maxWidth: 580 }}>
-          Lista honesta: cada item tem papel, status e stack reais. Projetos com stakeholders externos
-          ficam sob acordo até autorização explícita pra virarem case público.
+          Cada item tem papel, status e stack real. Sites de cliente aparecem aqui só
+          quando o cliente autoriza — os outros tô tocando sozinho ou em parceria.
         </p>
       </Fade>
 
@@ -217,22 +197,10 @@ function Projects() {
 /* ---------- writing ---------- */
 const POSTS = [
   {
-    date: "em breve",
+    date: "2026-05-25",
     title: "Como matei 6 hipóteses de trading cripto e parei no tempo certo",
-    draft: true,
-    href: "#",
-  },
-  {
-    date: "em breve",
-    title: "Por que escolhi Supabase pra começar o RdL",
-    draft: true,
-    href: "#",
-  },
-  {
-    date: "em breve",
-    title: "Apps Script + Sheets como CMS: ingrato mas entrega",
-    draft: true,
-    href: "#",
+    draft: false,
+    href: "posts/bot-cripto.html",
   },
 ];
 
@@ -243,8 +211,8 @@ function Writing() {
         <div className="eyebrow">writing</div>
         <h2 style={{ marginBottom: 8 }}>Notas de campo.</h2>
         <p style={{ marginBottom: 28, maxWidth: 580 }}>
-          Em vez de blog de tutorial: registro de decisões e pivots. O que funcionou,
-          o que matei cedo, e o método. Primeiros posts em produção.
+          Registro de decisões e pivots. O que funcionou, o que matei cedo, e o método.
+          Vai crescer aos poucos.
         </p>
       </Fade>
 
@@ -327,7 +295,8 @@ function About() {
             Dedicado, aprendo com facilidade e gosto de problema técnico denso.
           </p>
           <p>
-            Foco atual: <strong>SaaS B2B</strong> (RdL como aposta principal) e
+            Foco atual: <strong>SaaS B2B</strong> (RdL como aposta principal),
+            <strong> sites com automação</strong> pra clientes, e
             <strong> IA aplicada</strong> como multiplicador. Universitário em tecnologia,
             com produto, cliente e código rodando.
           </p>
@@ -341,16 +310,38 @@ function About() {
   );
 }
 
+/* ---------- princípio operacional ---------- */
+function Principle() {
+  return (
+    <section className="wrap principle section">
+      <Fade>
+        <div className="eyebrow">princípio operacional</div>
+        <p className="principle-quote">
+          <em>Preguiça produtiva.</em> Não é evitar trabalho, é evitar <em>trabalho redundante</em>.
+          Refator que poupa 10 horas futuras &gt; script que roda uma vez.
+          Hipótese morta cedo &gt; produto vivo sem edge.
+        </p>
+        <p className="principle-body">
+          Por isso testo hipótese cedo, mato a que não passa, e só escalo o que sobrou em pé.
+          Refutar uma ideia ruim no papel é mais barato que descobrir ela quebrada em produção.
+        </p>
+      </Fade>
+    </section>
+  );
+}
+
 /* ---------- contato ---------- */
 function Contact() {
   return (
     <section id="contato" className="wrap section">
       <Fade>
         <div className="eyebrow">contato</div>
-        <h2 style={{ marginBottom: 18 }}>Aberto pra projeto que ressoe.</h2>
+        <h2 style={{ marginBottom: 18 }}>Aberto pra projeto com escopo claro.</h2>
         <p style={{ marginBottom: 24, maxWidth: 580 }}>
-          Prefiro conversa por email, LinkedIn ou WhatsApp. Sem rodeio: me diz o problema,
-          contexto e prazo. Respondo se acho que posso ajudar de verdade.
+          Foco em <strong>site institucional</strong> (com captura de leads e automação),
+          <strong> SaaS B2B</strong> e <strong>automação com IA</strong>.
+          Escopo típico: 2 a 12 semanas. Prefiro conversa por email, LinkedIn ou WhatsApp —
+          me diz o problema, contexto e prazo.
         </p>
         <div className="contact">
           <div className="contact-line">
@@ -399,11 +390,11 @@ function App() {
       <Nav />
       <main>
         <Hero />
-        <Principle />
         <Projects />
         <Writing />
         <Stack />
         <About />
+        <Principle />
         <Contact />
       </main>
       <Footer />
