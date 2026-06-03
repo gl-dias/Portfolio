@@ -197,6 +197,12 @@ function Projects() {
 /* ---------- writing ---------- */
 const POSTS = [
   {
+    date: "2026-06-02",
+    title: "Como lancei um SaaS do zero ao cobrando em dois dias",
+    draft: false,
+    href: "posts/date-checklist.html",
+  },
+  {
     date: "2026-05-25",
     title: "Como matei 6 hipóteses de trading cripto e parei no tempo certo",
     draft: false,

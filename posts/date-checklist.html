@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Como lancei um SaaS do zero ao cobrando em dois dias · gl-dias.dev</title>
+  <meta name="description" content="Peguei um app pessoal, transformei num SaaS multi-tenant pago e botei pra cobrar de verdade — pagamento, auth, RLS, legal auditado, deploy — em dois dias. O método, os bugs e o que dá pra reaproveitar." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0A0B'/><circle cx='16' cy='16' r='5' fill='%23E8A040'/></svg>" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <span class="dot"></span>
+        gl-dias<span style="color: #56575E">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#projetos">projetos</a>
+        <a href="../index.html#writing">writing</a>
+        <a href="../index.html#sobre">sobre</a>
+        <a href="../index.html#contato">contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap post-page">
+    <a href="../index.html#writing" class="post-back">← voltar pra writing</a>
+
+    <header class="post-header">
+      <div class="post-meta">
+        <span class="post-meta-date">2026-06-02</span>
+        <span class="post-meta-sep">·</span>
+        <span>writing</span>
+        <span class="post-meta-sep">·</span>
+        <span>~7 min</span>
+      </div>
+      <h1>Como lancei um SaaS do zero ao cobrando em dois dias</h1>
+      <p class="post-lede">
+        Peguei um app pessoal, transformei num SaaS multi-tenant pago e botei pra cobrar de
+        verdade — pagamento, auth, RLS, legal auditado, deploy e marketing — em dois dias.
+        Esse post é o método: as decisões que economizaram tempo, os bugs que custaram, e o
+        que dá pra reaproveitar em qualquer produto.
+      </p>
+    </header>
+
+    <article class="post-content">
+      <h2>O que construí</h2>
+      <p>
+        <strong>Date Checklist</strong> — um SaaS pra casais montarem a lista de dates juntos:
+        checklist em tempo real, sortear o próximo date, e uma linha do tempo com as fotos dos
+        que já rolaram. A feature de fotos é paga: <code>R$ 9,90</code> vitalício por sala.
+        Multi-tenant de verdade — cada casal tem uma sala isolada, com pagamento processado
+        pelo Mercado Pago.
+      </p>
+      <p>
+        O nicho é o de menos. O ponto deste post é que isso é um <strong>produto pago,
+        completo e no ar</strong> — não um protótipo. E a parte difícil de um SaaS não é a
+        tela bonita: é cobrar de um estranho na internet sem furar segurança nem lei.
+      </p>
+
+      <h2>As decisões que couberam nos dois dias</h2>
+      <p>
+        Velocidade não veio de digitar rápido. Veio de cortar o caminho certo nas decisões de
+        arquitetura — e de recusar as que dariam retrabalho depois.
+      </p>
+      <ul>
+        <li>
+          <strong>Clone limpo, não migração.</strong> Era um app pessoal sem multi-tenancy.
+          Migrar o banco pra um modelo de salas seria mais lento e arriscado que começar do
+          zero com o schema certo. O app pessoal ficou intacto; o SaaS nasceu com Supabase
+          próprio.
+        </li>
+        <li>
+          <strong>RLS real, sem brigar com recursão.</strong> Isolamento por sala exige Row
+          Level Security. Mas uma policy que consulta a tabela de membros, que tem policy que
+          consulta a si mesma, entra em recursão. A saída foi encapsular o "sou membro desta
+          sala?" numa função <code>security definer</code> — roda como dono e quebra o ciclo.
+        </li>
+        <li>
+          <strong><code>is_premium</code> imutável pelo cliente.</strong> O que o pagamento
+          destrava nunca pode ser ligado pelo front. Só o webhook (com a chave de serviço,
+          que ignora RLS) muda. <em>Column grant</em> bloqueia o resto.
+        </li>
+        <li>
+          <strong>Cloudflare, não Vercel.</strong> O plano grátis da Vercel proíbe uso
+          comercial nos termos — vender exigiria o plano pago. Cloudflare Pages grátis
+          permite. Migrei as functions pro formato Web/<code>fetch</code> + Web Crypto.
+        </li>
+        <li>
+          <strong>SMTP próprio, não pagar pelo nativo.</strong> O e-mail nativo do Supabase
+          tem rate limit baixo (é "só pra teste"), e pagar o plano não resolve isso. SMTP
+          externo (Brevo, 300/dia grátis) com o domínio autenticado resolveu — e os links de
+          login pararam de cair em spam.
+        </li>
+      </ul>
+      <p class="post-aside">
+        Padrão: cada "atalho" foi na verdade uma decisão pra <em>não</em> pagar dívida
+        técnica depois. Rápido e descartável são coisas diferentes.
+      </p>
+
+      <h2>O que quebrou — e o que cada bug ensinou</h2>
+      <p>
+        Lançar de verdade é onde os detalhes aparecem. Quatro que custaram tempo e viraram
+        regra reutilizável:
+      </p>
+      <h3>"Uma das partes é de teste"</h3>
+      <p>
+        O pagamento recusava mesmo com a credencial de produção (<code>APP_USR-</code>). O
+        detalhe: o token existe, mas as credenciais de produção do Mercado Pago só passam a
+        valer depois de <strong>ativadas</strong> (preencher ramo + site). Antes disso, ele
+        opera como teste.
+      </p>
+      <h3>A sessão sumia ao voltar do pagamento</h3>
+      <p>
+        Pagava, voltava pro site e estava deslogado. Causa: <code>localStorage</code> é
+        <strong>por origem</strong>, e o retorno do gateway apontava pra um domínio diferente
+        do que o usuário tinha acessado. Regra: as URLs de retorno (e o redirect do login)
+        têm que voltar pro <em>mesmo host</em> de onde veio a pessoa.
+      </p>
+      <h3>O convite caía na sala errada</h3>
+      <p>
+        Dois bugs juntos: o modelo N:N permitia múltiplas salas e o app pegava a "mais antiga";
+        e uma corrida de tempo no carregamento fazia a tela de onboarding montar e consumir o
+        convite antes da sala real carregar. Solução: <strong>uma sala por pessoa</strong>
+        (limpa vínculos antigos ao entrar) + segurar o "carregando" até o fetch real terminar.
+      </p>
+      <h3>Texto fantasma no iOS</h3>
+      <p>
+        Um botão trocava de texto e o WebKit não repintava — ficava o texto antigo
+        "queimado" por baixo do novo. Só no iOS. Fix: forçar o React a recriar o elemento
+        com uma <code>key</code> por estado, em vez de reaproveitar o nó.
+      </p>
+
+      <h2>Conformidade não foi opcional</h2>
+      <p>
+        Cobrar de estranho na internet sobe o modelo de ameaça — e é aqui que a maioria dos
+        "fiz em um fim de semana" para. Eu não pulei:
+      </p>
+      <ul>
+        <li>
+          <strong>Auditoria legal</strong> dos termos e da política de privacidade
+          (revisão multi-perspectiva + um advogado de verdade revisando).
+        </li>
+        <li>
+          <strong>LGPD/CDC na prática:</strong> confirmação de maioridade e consentimento
+          explícito no cadastro, reembolso de 7 dias, e <strong>exclusão de conta
+          automatizada</strong> — um endpoint que apaga os dados, as fotos no storage e o
+          login de verdade, não "manda um e-mail que a gente resolve".
+        </li>
+        <li>
+          Dado pessoal do dono fora do site público, e cláusulas de incidente e
+          transferência internacional escritas (não copiadas de template genérico).
+        </li>
+      </ul>
+
+      <h2>O que dá pra levar disso</h2>
+      <ol>
+        <li>
+          <strong>A velocidade está nas decisões, não na digitação.</strong> As horas que eu
+          não gastei foram as que recusei: migração, host errado, e-mail caro, RLS recursiva.
+        </li>
+        <li>
+          <strong>Cortar caminho ≠ pular o que importa.</strong> Segurança, pagamento e legal
+          foram feitos direito — é justamente o que separa um SaaS de um protótipo.
+        </li>
+        <li>
+          <strong>Bug em produção é dado.</strong> Cada um dos quatro virou uma regra que eu
+          carrego pro próximo projeto.
+        </li>
+        <li>
+          <strong>"Completo" inclui a parte chata.</strong> Legal, conformidade e exclusão de
+          conta não são polimento — são o produto sendo vendável.
+        </li>
+      </ol>
+
+      <p class="post-close">
+        Dois dias, do zero ao cobrando. O produto está no ar em
+        <a href="https://datechecklist.com.br" target="_blank" rel="noopener">datechecklist.com.br</a>.
+        Se você precisa de um MVP ou SaaS feito assim — rápido, mas sem pular a parte que
+        importa — é o tipo de coisa que eu faço.
+      </p>
+    </article>
+
+    <footer class="post-footer">
+      <a href="../index.html#writing" class="post-back">← voltar pra writing</a>
+      <span class="post-footer-sig">guilherme dias batista · 2026</span>
+    </footer>
+  </main>
+</body>
+</html>
