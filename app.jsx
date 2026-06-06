@@ -108,9 +108,9 @@ const PROJECTS = [
     role: "client",
     roleLabel: "freela · entregue",
     tagline: "Site profissional pra consultor de cursos, com captura automática de leads.",
-    desc: "Site institucional do consultor Prof. Luiz Barbieri. Páginas de cursos, captura de leads e envio automático de materiais. No ar e iterando.",
+    desc: "Site institucional do consultor Prof. Luiz Barbieri. Páginas de cursos, captura de leads e envio automático de materiais. No ar.",
     stack: ["HTML/CSS", "JS", "Apps Script", "Sheets como CMS"],
-    status: "v1 publicada",
+    status: "entregue · no ar",
     href: "https://barbiericonsulting.pages.dev/",
   },
   {
