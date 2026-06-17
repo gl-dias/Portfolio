@@ -70,9 +70,9 @@ function Hero() {
 
       <Fade delay={160}>
         <p className="hero-sub">
-          Full-stack focado em produto. Faço <strong>SaaS B2B</strong> (RdL, plataforma de editais públicos),
+          Full-stack focado em produto. Faço <strong>SaaS B2B</strong>,
           <strong> sites pra clientes</strong> com captura de leads, e
-          <strong> automações com IA</strong> pra processo que se repete demais.
+          <strong> automações com IA</strong> onde ela faz sentido.
           Stack escolhida por contexto, não por hype.
         </p>
       </Fade>
@@ -93,16 +93,6 @@ function Hero() {
 
 /* ---------- projetos ---------- */
 const PROJECTS = [
-  {
-    name: "RdL",
-    role: "lead",
-    roleLabel: "founder · ativo",
-    tagline: "Software pra empresas que disputam editais do governo.",
-    desc: "SaaS B2B de monitoramento de editais de licitação pública. Pipeline de ingestão de portais oficiais, normalização de modalidades, e alertas por critério de busca. Em construção, com cliente piloto.",
-    stack: ["Next.js", "Supabase", "Postgres", "Python (ingestão)", "GitHub Actions"],
-    status: "v0 em uso interno · MVP em fechamento com cliente piloto",
-    href: null,
-  },
   {
     name: "Date Checklist",
     role: "lead",
@@ -312,9 +302,9 @@ function About() {
             Dedicado, aprendo com facilidade e gosto de problema técnico denso.
           </p>
           <p>
-            Foco atual: <strong>SaaS B2B</strong> (RdL como aposta principal),
-            <strong> sites com automação</strong> pra clientes, e
-            <strong> IA aplicada</strong> como multiplicador. Universitário em tecnologia,
+            Foco atual: <strong>SaaS B2B</strong> e
+            <strong> sites com automação</strong> pra clientes. Entendo IA o suficiente
+            pra saber onde ela entra e onde não entra. Universitário em tecnologia,
             com produto, cliente e código rodando.
           </p>
           <p>
