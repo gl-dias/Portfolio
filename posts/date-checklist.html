@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Como lancei um SaaS do zero ao cobrando em dois dias · gl-dias.dev</title>
-  <meta name="description" content="Peguei um app pessoal, transformei num SaaS multi-tenant pago e botei pra cobrar de verdade — pagamento, auth, RLS, legal auditado, deploy — em dois dias. O método, os bugs e o que dá pra reaproveitar." />
+  <meta name="description" content="Peguei um app pessoal, transformei num SaaS multi-tenant pago e botei pra cobrar de verdade (pagamento, auth, RLS, legal auditado, deploy) em dois dias. O método, os bugs e o que dá pra reaproveitar." />
+
+  <meta property="og:title" content="Como lancei um SaaS do zero ao cobrando em dois dias · gl-dias.dev" />
+  <meta property="og:description" content="Peguei um app pessoal, transformei num SaaS multi-tenant pago e botei pra cobrar de verdade (pagamento, auth, RLS, legal auditado, deploy) em dois dias. O método, os bugs e o que dá pra reaproveitar." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://gl-dias.pages.dev/posts/date-checklist.html" />
+  <meta property="og:image" content="https://gl-dias.pages.dev/images/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://gl-dias.pages.dev/posts/date-checklist.html" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,7 +52,7 @@
       <h1>Como lancei um SaaS do zero ao cobrando em dois dias</h1>
       <p class="post-lede">
         Peguei um app pessoal, transformei num SaaS multi-tenant pago e botei pra cobrar de
-        verdade — pagamento, auth, RLS, legal auditado, deploy e marketing — em dois dias.
+        verdade (pagamento, auth, RLS, legal auditado, deploy e marketing) em dois dias.
         Esse post é o método: as decisões que economizaram tempo, os bugs que custaram, e o
         que dá pra reaproveitar em qualquer produto.
       </p>
@@ -53,22 +61,22 @@
     <article class="post-content">
       <h2>O que construí</h2>
       <p>
-        <strong>Date Checklist</strong> — um SaaS pra casais montarem a lista de dates juntos:
+        <strong>Date Checklist</strong>, um SaaS pra casais montarem a lista de dates juntos:
         checklist em tempo real, sortear o próximo date, e uma linha do tempo com as fotos dos
         que já rolaram. A feature de fotos é paga: <code>R$ 9,90</code> vitalício por sala.
-        Multi-tenant de verdade — cada casal tem uma sala isolada, com pagamento processado
+        Multi-tenant de verdade: cada casal tem uma sala isolada, com pagamento processado
         pelo Mercado Pago.
       </p>
       <p>
         O nicho é o de menos. O ponto deste post é que isso é um <strong>produto pago,
-        completo e no ar</strong> — não um protótipo. E a parte difícil de um SaaS não é a
+        completo e no ar</strong>, não um protótipo. E a parte difícil de um SaaS não é a
         tela bonita: é cobrar de um estranho na internet sem furar segurança nem lei.
       </p>
 
       <h2>As decisões que couberam nos dois dias</h2>
       <p>
         Velocidade não veio de digitar rápido. Veio de cortar o caminho certo nas decisões de
-        arquitetura — e de recusar as que dariam retrabalho depois.
+        arquitetura, e de recusar as que dariam retrabalho depois.
       </p>
       <ul>
         <li>
@@ -81,7 +89,7 @@
           <strong>RLS real, sem brigar com recursão.</strong> Isolamento por sala exige Row
           Level Security. Mas uma policy que consulta a tabela de membros, que tem policy que
           consulta a si mesma, entra em recursão. A saída foi encapsular o "sou membro desta
-          sala?" numa função <code>security definer</code> — roda como dono e quebra o ciclo.
+          sala?" numa função <code>security definer</code>, que roda como dono e quebra o ciclo.
         </li>
         <li>
           <strong><code>is_premium</code> imutável pelo cliente.</strong> O que o pagamento
@@ -90,13 +98,13 @@
         </li>
         <li>
           <strong>Cloudflare, não Vercel.</strong> O plano grátis da Vercel proíbe uso
-          comercial nos termos — vender exigiria o plano pago. Cloudflare Pages grátis
+          comercial nos termos. Vender exigiria o plano pago. Cloudflare Pages grátis
           permite. Migrei as functions pro formato Web/<code>fetch</code> + Web Crypto.
         </li>
         <li>
           <strong>SMTP próprio, não pagar pelo nativo.</strong> O e-mail nativo do Supabase
           tem rate limit baixo (é "só pra teste"), e pagar o plano não resolve isso. SMTP
-          externo (Brevo, 300/dia grátis) com o domínio autenticado resolveu — e os links de
+          externo (Brevo, 300/dia grátis) com o domínio autenticado resolveu, e os links de
           login pararam de cair em spam.
         </li>
       </ul>
@@ -105,7 +113,7 @@
         técnica depois. Rápido e descartável são coisas diferentes.
       </p>
 
-      <h2>O que quebrou — e o que cada bug ensinou</h2>
+      <h2>O que quebrou e o que cada bug ensinou</h2>
       <p>
         Lançar de verdade é onde os detalhes aparecem. Quatro que custaram tempo e viraram
         regra reutilizável:
@@ -133,14 +141,14 @@
       </p>
       <h3>Texto fantasma no iOS</h3>
       <p>
-        Um botão trocava de texto e o WebKit não repintava — ficava o texto antigo
+        Um botão trocava de texto e o WebKit não repintava: ficava o texto antigo
         "queimado" por baixo do novo. Só no iOS. Fix: forçar o React a recriar o elemento
         com uma <code>key</code> por estado, em vez de reaproveitar o nó.
       </p>
 
       <h2>Conformidade não foi opcional</h2>
       <p>
-        Cobrar de estranho na internet sobe o modelo de ameaça — e é aqui que a maioria dos
+        Cobrar de estranho na internet sobe o modelo de ameaça, e é aqui que a maioria dos
         "fiz em um fim de semana" para. Eu não pulei:
       </p>
       <ul>
@@ -151,7 +159,7 @@
         <li>
           <strong>LGPD/CDC na prática:</strong> confirmação de maioridade e consentimento
           explícito no cadastro, reembolso de 7 dias, e <strong>exclusão de conta
-          automatizada</strong> — um endpoint que apaga os dados, as fotos no storage e o
+          automatizada</strong>: um endpoint que apaga os dados, as fotos no storage e o
           login de verdade, não "manda um e-mail que a gente resolve".
         </li>
         <li>
@@ -168,7 +176,7 @@
         </li>
         <li>
           <strong>Cortar caminho ≠ pular o que importa.</strong> Segurança, pagamento e legal
-          foram feitos direito — é justamente o que separa um SaaS de um protótipo.
+          foram feitos direito. É justamente o que separa um SaaS de um protótipo.
         </li>
         <li>
           <strong>Bug em produção é dado.</strong> Cada um dos quatro virou uma regra que eu
@@ -176,15 +184,15 @@
         </li>
         <li>
           <strong>"Completo" inclui a parte chata.</strong> Legal, conformidade e exclusão de
-          conta não são polimento — são o produto sendo vendável.
+          conta não são polimento, são o produto sendo vendável.
         </li>
       </ol>
 
       <p class="post-close">
         Dois dias, do zero ao cobrando. O produto está no ar em
         <a href="https://datechecklist.com.br" target="_blank" rel="noopener">datechecklist.com.br</a>.
-        Se você precisa de um MVP ou SaaS feito assim — rápido, mas sem pular a parte que
-        importa — é o tipo de coisa que eu faço.
+        Se você precisa de um MVP ou SaaS feito assim, rápido mas sem pular a parte que
+        importa, é o tipo de coisa que eu faço.
       </p>
     </article>
 

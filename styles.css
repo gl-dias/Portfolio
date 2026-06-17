@@ -1,5 +1,5 @@
 /* ============================================================
-   guilhermedias — terminal honesto
+   guilhermedias, terminal honesto
    ============================================================ */
 
 :root {
@@ -9,7 +9,7 @@
   --line-strong: rgba(255, 255, 255, 0.12);
   --text: #E8E8EA;
   --text-dim: #8B8C92;
-  --text-faint: #56575E;
+  --text-faint: #7C7D85;
   --accent: #E8A040;
   --accent-dim: rgba(232, 160, 64, 0.6);
   --accent-faint: rgba(232, 160, 64, 0.12);
@@ -19,6 +19,16 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* anti-FOUC: esconde até o React montar (revelado no app.jsx) */
+#root { visibility: hidden; }
+
+/* foco visível pra navegação por teclado (acessibilidade) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
 
 html, body {
   background: var(--bg);

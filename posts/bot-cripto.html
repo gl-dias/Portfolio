@@ -6,6 +6,14 @@
   <title>Como matei 6 hipóteses de trading cripto · gl-dias.dev</title>
   <meta name="description" content="Em 2 meses testei 6 hipóteses estruturalmente diferentes pra achar edge em majors retail de cripto. Refutei todas com walk-forward. Post-mortem honesto." />
 
+  <meta property="og:title" content="Como matei 6 hipóteses de trading cripto · gl-dias.dev" />
+  <meta property="og:description" content="Em 2 meses testei 6 hipóteses estruturalmente diferentes pra achar edge em majors retail de cripto. Refutei todas com walk-forward. Post-mortem honesto." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://gl-dias.pages.dev/posts/bot-cripto.html" />
+  <meta property="og:image" content="https://gl-dias.pages.dev/images/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://gl-dias.pages.dev/posts/bot-cripto.html" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -61,7 +69,7 @@
       <p>
         Stack: Python 3.11, <code>ccxt</code> pra Binance, indicadores na mão
         (EMA, RSI, ATR, ADX, Bollinger). XGBoost na camada ML, anthropic SDK no juiz.
-        Sem <code>ta-lib</code>, sem <code>pandas-ta</code> — controle total da fórmula
+        Sem <code>ta-lib</code>, sem <code>pandas-ta</code>: controle total da fórmula
         e zero dependência nativa pesada.
       </p>
 
@@ -84,20 +92,20 @@
 
       <h2>Os 6 testes</h2>
 
-      <h3>H1 — EMA 9/21 crossover (legada)</h3>
+      <h3>H1: EMA 9/21 crossover (legada)</h3>
       <p>
         91 dias de backtest. Sharpe <strong>−12,6</strong>. Retorno
         <strong>−22,85%</strong> vs −7,52% do buy-and-hold. Win rate 13,4%.
         0 dos 10 pares positivos. <strong>Refutada.</strong>
       </p>
 
-      <h3>H2 — Mesma estratégia, invertida (SHORT espelhado)</h3>
+      <h3>H2: Mesma estratégia, invertida (SHORT espelhado)</h3>
       <p>
         Hipótese: se a entrada LONG perde, a saída SHORT ganha. Não. O mercado não é
         simétrico em torno do sinal. <strong>Refutada.</strong>
       </p>
 
-      <h3>H3 — Mean reversion explícita</h3>
+      <h3>H3: Mean reversion explícita</h3>
       <p>
         RSI overbought + bearish candle, sem trend filter. Mesma família estatística,
         mesmo destino. <strong>Refutada.</strong>
@@ -108,22 +116,22 @@
         Hora de mudar de família.
       </p>
 
-      <h3>H4 — Funding rate extremo (>0,05% × 3 settlements)</h3>
+      <h3>H4: Funding rate extremo (>0,05% × 3 settlements)</h3>
       <p>
         Sinal raro: apenas 9 eventos em 91 dias × 10 pares, todos em DOT.
-        Calibração relaxada (0,01% × 3) gerou 109 eventos com EV +0,122% líquido —
+        Calibração relaxada (0,01% × 3) gerou 109 eventos com EV +0,122% líquido:
         edge marginal e mecanismo descaracterizado. <strong>Descartada antes de gastar
         slot de walk-forward.</strong>
       </p>
 
-      <h3>H5 — Cointegração formal Engle-Granger ETH/BTC (Z-score >|2σ|)</h3>
+      <h3>H5: Cointegração formal Engle-Granger ETH/BTC (Z-score >|2σ|)</h3>
       <p>
         ADF <code>p&lt;0,10</code> em apenas 36% do período (vs critério ≥70%).
         β oscila 0,67-1,37. Apenas 2 eventos válidos.
         <strong>Descartada antes de walk-forward.</strong>
       </p>
 
-      <h3>H6 — Funding settlement timing (00/08/16 UTC)</h3>
+      <h3>H6: Funding settlement timing (00/08/16 UTC)</h3>
       <p>
         Sinal direcional real existe: funding negativo → +0,083% pós-settlement;
         funding positivo → −0,113%. Mas a magnitude é 3-6× menor que round-trip cost
@@ -143,7 +151,7 @@
       <p>
         A resposta foi clara: <strong>bot $500 com 0h</strong>. Renda passiva era o
         objetivo real, não ownership de produto. Os consultores que recomendavam
-        pivot pra SaaS estavam respondendo à pergunta errada — porque eu nunca tinha
+        pivot pra SaaS estavam respondendo à pergunta errada, porque eu nunca tinha
         explicitado qual era a minha.
       </p>
       <p>
@@ -160,7 +168,7 @@
           critérios fechados. Reutilizável fora de cripto.
         </li>
         <li>
-          <strong>5 bugs operacionais corrigidos</strong> — position sizing errado,
+          <strong>5 bugs operacionais corrigidos</strong>: position sizing errado,
           TP/SL pós-fill, drawdown guard, sanitização de log. Pré-requisitos de
           qualquer deploy futuro.
         </li>
@@ -184,7 +192,7 @@
       <p>
         O dataset com 74.769 sinais labeled tá pronto pra Kaggle. A biblioteca standalone
         <code>cryptobacktest.py</code> (~400 LoC, walk-forward built-in, MIT) tá pronta
-        pra GitHub. Esses entregam valor independente do edge. Mas não vou ativar agora —
+        pra GitHub. Esses entregam valor independente do edge. Mas não vou ativar agora:
         o objetivo era renda passiva, não virar open-source maintainer.
       </p>
 

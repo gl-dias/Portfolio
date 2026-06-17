@@ -1,5 +1,5 @@
 /* eslint-disable */
-/* gl-dias.dev — terminal honesto, dado em vez de hype */
+/* gl-dias.dev: terminal honesto, dado em vez de hype */
 
 const { useState, useEffect, useRef } = React;
 
@@ -100,8 +100,19 @@ const PROJECTS = [
     tagline: "Software pra empresas que disputam editais do governo.",
     desc: "SaaS B2B de monitoramento de editais de licitação pública. Pipeline de ingestão de portais oficiais, normalização de modalidades, e alertas por critério de busca. Em construção, com cliente piloto.",
     stack: ["Next.js", "Supabase", "Postgres", "Python (ingestão)", "GitHub Actions"],
-    status: "v0 em uso interno · MVP pra fechar Q2",
+    status: "v0 em uso interno · MVP em fechamento com cliente piloto",
     href: null,
+  },
+  {
+    name: "Date Checklist",
+    role: "lead",
+    roleLabel: "produto próprio · no ar",
+    tagline: "SaaS pra casais montarem a lista de dates juntos, com pagamento de verdade.",
+    desc: "App multi-tenant: cada casal tem uma sala isolada com checklist de dates em tempo real, sorteio do próximo e linha do tempo com fotos (feature paga, R$ 9,90 vitalício). Pagamento via Mercado Pago, RLS de verdade e exclusão de conta automatizada. No ar e cobrando.",
+    stack: ["React", "Supabase", "Postgres (RLS)", "Cloudflare Pages", "Mercado Pago"],
+    status: "no ar · cobrando · multi-tenant",
+    href: "https://datechecklist.com.br",
+    hrefLabel: "visitar o produto",
   },
   {
     name: "Site Prof. Luiz Barbieri",
@@ -128,7 +139,7 @@ const PROJECTS = [
     role: "draft",
     roleLabel: "pessoal · planejado",
     tagline: "Assistente pessoal por voz que conversa e executa tarefas no computador.",
-    desc: "Pra uso próprio. Não responde só (como a Alexa) — executa via Claude Code quando faz sentido. Vault Obsidian como contexto pessoal. Em planejamento detalhado, ainda não iniciado.",
+    desc: "Pra uso próprio. Não responde só (como a Alexa): executa via Claude Code quando faz sentido. Vault Obsidian como contexto pessoal. Em planejamento detalhado, ainda não iniciado.",
     stack: ["Python", "Claude API", "Whisper", "ChromaDB", "MCP"],
     status: "fase de plano · gate de início definido",
     href: null,
@@ -140,7 +151,7 @@ const PROJECTS = [
     tagline: "Testei 6 hipóteses de trading rigorosamente, matei todas, parei no tempo certo.",
     desc: "Engine em 3 camadas (técnica + ML + juiz LLM). 91 dias de walk-forward IS/OOS, 6 hipóteses estruturalmente diferentes refutadas. Pausado depois de provar que não havia edge no regime atual.",
     stack: ["Python", "ccxt", "XGBoost", "Claude API"],
-    status: "91 dias de walk-forward · 6 hipóteses refutadas · 0 trades em prod",
+    status: "91 dias de walk-forward · 6 hipóteses refutadas · pausado por falta de edge",
     href: "posts/bot-cripto.html",
     hrefLabel: "ler o post completo",
   },
@@ -181,7 +192,7 @@ function Projects() {
         <h2 style={{ marginBottom: 8 }}>O que tenho em pé hoje.</h2>
         <p style={{ marginBottom: 28, maxWidth: 580 }}>
           Cada item tem papel, status e stack real. Sites de cliente aparecem aqui só
-          quando o cliente autoriza — os outros tô tocando sozinho ou em parceria.
+          quando o cliente autoriza. Os outros tô tocando sozinho ou em parceria.
         </p>
       </Fade>
 
@@ -296,8 +307,8 @@ function About() {
         <h2 style={{ marginBottom: 18 }}>Em uma frase.</h2>
         <div className="about">
           <p>
-            Dev full-stack do <strong>Rio de Janeiro</strong>, movido por <strong>preguiça produtiva</strong>:
-            sempre buscando o caminho mais eficiente pra fazer a coisa certa.
+            Dev full-stack do <strong>Rio de Janeiro</strong>, movido por uma regra simples:
+            <strong> o caminho mais curto até a coisa certa</strong>, sem pular o que importa.
             Dedicado, aprendo com facilidade e gosto de problema técnico denso.
           </p>
           <p>
@@ -323,12 +334,12 @@ function Principle() {
       <Fade>
         <div className="eyebrow">princípio operacional</div>
         <p className="principle-quote">
-          <em>Preguiça produtiva.</em> Não é evitar trabalho, é evitar <em>trabalho redundante</em>.
-          Refator que poupa 10 horas futuras &gt; script que roda uma vez.
-          Hipótese morta cedo &gt; produto vivo sem edge.
+          <em>Rápido, sem pular o que importa.</em> Velocidade não vem de digitar rápido,
+          vem de cortar a decisão certa e recusar a que gera retrabalho. O que não dá pra cortar,
+          tipo <em>segurança, conformidade e o detalhe chato</em>, entra inteiro.
         </p>
         <p className="principle-body">
-          Por isso testo hipótese cedo, mato a que não passa, e só escalo o que sobrou em pé.
+          Por isso testo hipótese cedo, mato a que não tem edge, e escalo só o que fica de pé.
           Refutar uma ideia ruim no papel é mais barato que descobrir ela quebrada em produção.
         </p>
       </Fade>
@@ -346,8 +357,8 @@ function Contact() {
         <p style={{ marginBottom: 24, maxWidth: 580 }}>
           Foco em <strong>site institucional</strong> (com captura de leads e automação),
           <strong> SaaS B2B</strong> e <strong>automação com IA</strong>.
-          Escopo típico: 2 a 12 semanas. Prefiro conversa por email, LinkedIn ou WhatsApp —
-          me diz o problema, contexto e prazo.
+          Escopo típico: 2 a 12 semanas. Prefiro conversa por email, LinkedIn ou WhatsApp.
+          Me diz o problema, contexto e prazo.
         </p>
         <div className="contact">
           <div className="contact-line">
@@ -391,6 +402,11 @@ function Footer() {
 
 /* ---------- app ---------- */
 function App() {
+  useEffect(() => {
+    const root = document.getElementById("root");
+    if (root) root.style.visibility = "visible";
+  }, []);
+
   return (
     <>
       <Nav />
