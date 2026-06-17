@@ -29,6 +29,9 @@ html, body {
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "ss01", "cv11";
   letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 ::selection { background: var(--accent-faint); color: #fff; }
@@ -149,7 +152,7 @@ p { color: var(--text-dim); }
   margin-bottom: 32px;
 }
 .hero-sub strong { color: var(--text); font-weight: 500; }
-.hero-actions { display: flex; gap: 12px; margin-bottom: 44px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 44px; }
 .btn {
   font-family: 'Geist Mono', monospace;
   font-size: 12px;
@@ -325,7 +328,7 @@ p { color: var(--text-dim); }
   font-size: 12px;
   color: var(--text-dim);
 }
-.stack-ribbon .group { display: inline-flex; align-items: baseline; gap: 14px; }
+.stack-ribbon .group { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; }
 .stack-ribbon .group-label {
   color: var(--text-faint);
   text-transform: uppercase;
@@ -541,13 +544,63 @@ p { color: var(--text-dim); }
 /* ============================================================
    responsive
    ============================================================ */
+
+/* tablet / telas médias: solta o respiro vertical */
+@media (max-width: 720px) {
+  .section { padding: 48px 0; }
+  .hero { padding: 64px 0 40px; }
+}
+
+/* mobile */
 @media (max-width: 600px) {
   .wrap, .nav-inner { padding-left: 22px; padding-right: 22px; }
-  h1 { font-size: 30px; }
+
+  h1 { font-size: 29px; }
+  h2 { font-size: 19px; }
   .post-page h1 { font-size: 26px; }
-  .post { grid-template-columns: 78px 1fr auto; gap: 14px; }
-  .contact-line { grid-template-columns: 88px 1fr; }
-  .nav-links { gap: 16px; }
+
+  .nav-inner { padding-top: 12px; padding-bottom: 12px; }
+  .nav-links { gap: 14px; font-size: 11.5px; flex-wrap: wrap; justify-content: flex-end; }
+
+  .hero { padding: 52px 0 36px; }
+  .hero-headline { font-size: 27px; }
+  .hero-sub { font-size: 15.5px; }
+
+  .section { padding: 44px 0; }
+
+  .post { grid-template-columns: 72px 1fr auto; gap: 12px; }
+
+  .contact-line { grid-template-columns: 92px 1fr; }
+  .contact-line .val { min-width: 0; }            /* deixa o email quebrar em vez de estourar */
+
   .post-page { padding: 44px 22px 60px; }
   .post-content { font-size: 15px; }
+  .post-content h2 { font-size: 20px; }
+  .post-lede { font-size: 16px; }
+}
+
+/* mobile estreito (iPhone SE / Android pequeno) */
+@media (max-width: 430px) {
+  .wrap, .nav-inner { padding-left: 18px; padding-right: 18px; }
+
+  h1 { font-size: 25px; }
+  .hero-headline { font-size: 25px; }
+
+  .nav-links { gap: 12px; font-size: 11px; }
+
+  /* posts: data sobe pra própria linha, título + seta embaixo */
+  .post {
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    padding: 18px 0;
+  }
+  .post-date { grid-column: 1 / -1; }
+
+  /* contato: label em cima, valor embaixo ocupando a largura toda */
+  .contact-line {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .footer { font-size: 10.5px; }
 }
