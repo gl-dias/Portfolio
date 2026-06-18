@@ -41,6 +41,7 @@ function Nav() {
         <div className="nav-links">
           <a href="#projetos">projetos</a>
           <a href="#writing">writing</a>
+          <a href="#experimentos">experimentos</a>
           <a href="#sobre">sobre</a>
           <a href="#contato">contato</a>
         </div>
@@ -241,6 +242,42 @@ function Writing() {
   );
 }
 
+/* ---------- experimentos ---------- */
+const EXPERIMENTS = [
+  {
+    name: "Lab 3D",
+    role: "experiment",
+    roleLabel: "experimento · no ar",
+    tagline: "Os mesmos projetos daqui, mas como um grafo 3D que você orbita e explora.",
+    desc: "Releitura do portfólio em WebGL: cada projeto vira um nó flutuante no espaço, clica e a câmera voa até ele abrindo o detalhe. Estrelas, partículas, scanlines e som ambiente pra dar cara de visor, com resolução adaptativa que segura o FPS no mobile. Feito no tempo livre pra mexer com three.js a sério.",
+    stack: ["React", "three.js", "react-three-fiber", "drei", "Vite"],
+    status: "no ar · feito no tempo livre",
+    href: "/lab/",
+    hrefLabel: "abrir o lab",
+  },
+];
+
+function Experiments() {
+  return (
+    <section id="experimentos" className="wrap section">
+      <Fade>
+        <div className="eyebrow">tempo livre, sem cliente</div>
+        <h2 style={{ marginBottom: 8 }}>Experimentos.</h2>
+        <p style={{ marginBottom: 28, maxWidth: 580 }}>
+          Coisas que faço fora de projeto pra explorar técnica que não cabe no trabalho de cliente.
+          Não são produtos, são curiosidades. O que tá aqui abre e funciona. Se alguma te interessar, me chama.
+        </p>
+      </Fade>
+
+      <div className="proj-list">
+        {EXPERIMENTS.map((p, i) => (
+          <ProjectCard key={p.name} p={p} delay={i * 40} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* ---------- stack ---------- */
 function Stack() {
   return (
@@ -404,6 +441,7 @@ function App() {
         <Hero />
         <Projects />
         <Writing />
+        <Experiments />
         <Stack />
         <About />
         <Principle />
