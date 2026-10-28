@@ -54,19 +54,24 @@
   <script src="main.js" defer></script>
 </head>
 <body>
-  <nav class="nav">
+  <nav class="nav" aria-label="principal">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <span class="dot"></span>
-        gl-dias<span style="color: #56575E">.dev</span>
+        <span>gl-dias<span style="color: #56575E">.dev</span></span>
       </a>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="#projetos">projetos</a>
-        <a href="#writing">writing</a>
+        <a href="#notas">notas</a>
         <a href="#experimentos">experimentos</a>
         <a href="#sobre">sobre</a>
-        <a href="#contato">contato</a>
+        <a href="#contato" class="nav-link-contact">contato</a>
       </div>
+      <a class="btn btn-primary nav-cta" href="#contato">fale comigo</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="abrir menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
     </div>
   </nav>
 
@@ -182,15 +187,15 @@
             <span class="stack"><span class="stack-label">stack:</span>Python · ccxt · XGBoost · Claude API</span>
             <span class="status">· 91 dias de walk-forward · 6 hipóteses refutadas · pausado por falta de edge</span>
           </div>
-          <a class="proj-link" href="posts/bot-cripto.html">ler o post completo <span class="proj-link-arrow">↗</span></a>
+          <a class="proj-link" href="posts/bot-cripto.html">ler o post completo</a>
         </article>
       </div>
     </section>
 
-    <!-- writing -->
-    <section id="writing" class="wrap section">
+    <!-- notas -->
+    <section id="notas" class="wrap section">
       <div class="reveal">
-        <div class="eyebrow">writing</div>
+        <div class="eyebrow">notas</div>
         <h2 style="margin-bottom: 8px">Notas de campo.</h2>
         <p style="margin-bottom: 28px; max-width: 580px">
           Registro de decisões e pivots. O que funcionou, o que matei cedo, e o método.
@@ -235,7 +240,7 @@
             <span class="stack"><span class="stack-label">stack:</span>React · three.js · react-three-fiber · drei · Vite</span>
             <span class="status">· no ar · feito no tempo livre</span>
           </div>
-          <a class="proj-link" href="/lab/">abrir o lab <span class="proj-link-arrow">↗</span></a>
+          <a class="proj-link" href="/lab/">abrir o lab</a>
         </article>
       </div>
     </section>

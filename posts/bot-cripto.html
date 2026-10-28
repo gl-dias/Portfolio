@@ -21,31 +21,44 @@
   <link rel="stylesheet" href="../styles.css" />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0A0B'/><circle cx='16' cy='16' r='5' fill='%23E8A040'/></svg>" />
+  <script>
+    document.documentElement.classList.add("js");
+    setTimeout(function () {
+      if (!window.__revealReady) document.documentElement.classList.remove("js");
+    }, 1500);
+  </script>
+  <script src="../main.js" defer></script>
 </head>
 <body>
-  <nav class="nav">
+  <nav class="nav" aria-label="principal">
     <div class="nav-inner">
       <a href="../index.html" class="nav-logo">
         <span class="dot"></span>
-        gl-dias<span style="color: #56575E">.dev</span>
+        <span>gl-dias<span style="color: #56575E">.dev</span></span>
       </a>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="../index.html#projetos">projetos</a>
-        <a href="../index.html#writing">writing</a>
+        <a href="../index.html#notas">notas</a>
+        <a href="../index.html#experimentos">experimentos</a>
         <a href="../index.html#sobre">sobre</a>
-        <a href="../index.html#contato">contato</a>
+        <a href="../index.html#contato" class="nav-link-contact">contato</a>
       </div>
+      <a class="btn btn-primary nav-cta" href="../index.html#contato">fale comigo</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="abrir menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
     </div>
   </nav>
 
   <main class="wrap post-page">
-    <a href="../index.html#writing" class="post-back">← voltar pra writing</a>
+    <a href="../index.html#notas" class="post-back">← voltar pra notas</a>
 
     <header class="post-header">
       <div class="post-meta">
         <span class="post-meta-date">2026-05-25</span>
         <span class="post-meta-sep">·</span>
-        <span>writing</span>
+        <span>notas</span>
         <span class="post-meta-sep">·</span>
         <span>~6 min</span>
       </div>
@@ -224,7 +237,7 @@
     </article>
 
     <footer class="post-footer">
-      <a href="../index.html#writing" class="post-back">← voltar pra writing</a>
+      <a href="../index.html#notas" class="post-back">← voltar pra notas</a>
       <span class="post-footer-sig">guilherme dias batista · 2026</span>
     </footer>
   </main>
