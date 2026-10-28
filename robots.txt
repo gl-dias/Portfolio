@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gl-dias.pages.dev/sitemap.xml

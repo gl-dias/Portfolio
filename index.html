@@ -22,12 +22,351 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0A0B'/><circle cx='16' cy='16' r='5' fill='%23E8A040'/></svg>" />
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Guilherme Dias Batista",
+    "jobTitle": "Desenvolvedor full-stack",
+    "url": "https://gl-dias.pages.dev/",
+    "image": "https://gl-dias.pages.dev/images/og.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rio de Janeiro",
+      "addressRegion": "RJ",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://github.com/gl-dias",
+      "https://www.linkedin.com/in/guilherme-dias-838326241/",
+      "https://instagram.com/_gl.dias"
+    ]
+  }
+  </script>
+
+  <!-- reveal só esconde conteúdo se o JS rodar; se main.js não confirmar em 1,5s, tudo aparece -->
+  <script>
+    document.documentElement.classList.add("js");
+    setTimeout(function () {
+      if (!window.__revealReady) document.documentElement.classList.remove("js");
+    }, 1500);
+  </script>
+  <script src="main.js" defer></script>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel" src="app.jsx"></script>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="dot"></span>
+        gl-dias<span style="color: #56575E">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="#projetos">projetos</a>
+        <a href="#writing">writing</a>
+        <a href="#experimentos">experimentos</a>
+        <a href="#sobre">sobre</a>
+        <a href="#contato">contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- hero -->
+    <section class="hero wrap">
+      <div class="reveal">
+        <div class="hero-tag">
+          <span class="at">●</span>
+          <span>guilherme dias batista</span>
+          <span style="color: #56575E">·</span>
+          <span>rio de janeiro</span>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h1 class="hero-headline">
+          Construindo <em>SaaS B2B</em>, <em>sites</em> e <em>automações com IA</em>. Pelo caminho mais curto até a coisa certa.
+        </h1>
+      </div>
+
+      <div class="reveal">
+        <p class="hero-sub">
+          Full-stack focado em produto. Faço <strong>SaaS B2B</strong>,
+          <strong>sites pra clientes</strong> com captura de leads, e
+          <strong>automações com IA</strong> onde ela faz sentido.
+          Stack escolhida por contexto, não por hype.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projetos">ver projetos →</a>
+          <a class="btn" href="#contato">entrar em contato</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- projetos -->
+    <section id="projetos" class="wrap section">
+      <div class="reveal">
+        <div class="eyebrow">projetos selecionados</div>
+        <h2 style="margin-bottom: 8px">O que tenho em pé hoje.</h2>
+        <p style="margin-bottom: 28px; max-width: 580px">
+          Cada item tem papel, status e stack real. Sites de cliente aparecem aqui só
+          quando o cliente autoriza. Os outros tô tocando sozinho ou em parceria.
+        </p>
+      </div>
+
+      <div class="proj-list">
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3 class="proj-name">Date Checklist</h3>
+            <span class="proj-role lead">produto próprio · no ar</span>
+          </div>
+          <p class="proj-tagline">SaaS pra casais montarem a lista de dates juntos, com pagamento de verdade.</p>
+          <p class="proj-desc">App multi-tenant: cada casal tem uma sala isolada com checklist de dates em tempo real, sorteio do próximo e linha do tempo com fotos (feature paga, R$ 9,90 vitalício). Pagamento via Mercado Pago, RLS de verdade e exclusão de conta automatizada. No ar e cobrando.</p>
+          <div class="proj-meta">
+            <span class="stack"><span class="stack-label">stack:</span>React · Supabase · Postgres (RLS) · Cloudflare Pages · Mercado Pago</span>
+            <span class="status">· no ar · cobrando · multi-tenant</span>
+          </div>
+          <a class="proj-link" href="https://datechecklist.com.br" target="_blank" rel="noopener">visitar o produto <span class="proj-link-arrow">↗</span></a>
+        </article>
+
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3 class="proj-name">Site Prof. Luiz Barbieri</h3>
+            <span class="proj-role client">freela · entregue</span>
+          </div>
+          <p class="proj-tagline">Site profissional pra consultor de cursos, com captura automática de leads.</p>
+          <p class="proj-desc">Site institucional do consultor Prof. Luiz Barbieri. Páginas de cursos, captura de leads e envio automático de materiais. No ar.</p>
+          <div class="proj-meta">
+            <span class="stack"><span class="stack-label">stack:</span>HTML/CSS · JS · Apps Script · Sheets como CMS</span>
+            <span class="status">· entregue · no ar</span>
+          </div>
+          <a class="proj-link" href="https://barbiericonsulting.pages.dev/" target="_blank" rel="noopener">visitar site <span class="proj-link-arrow">↗</span></a>
+        </article>
+
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3 class="proj-name">Site LFG Tech</h3>
+            <span class="proj-role client">freela · em desenvolvimento</span>
+          </div>
+          <p class="proj-tagline">Site institucional pra empresa de tecnologia.</p>
+          <p class="proj-desc">Em construção, ainda não publicado. O link entra aqui quando o site for ao ar.</p>
+          <div class="proj-meta">
+            <span class="stack"><span class="stack-label">stack:</span>HTML/CSS · JS</span>
+            <span class="status">· em desenvolvimento</span>
+          </div>
+        </article>
+
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3 class="proj-name">Dias</h3>
+            <span class="proj-role draft">pessoal · planejado</span>
+          </div>
+          <p class="proj-tagline">Assistente pessoal por voz que conversa e executa tarefas no computador.</p>
+          <p class="proj-desc">Pra uso próprio. Não responde só (como a Alexa): executa via Claude Code quando faz sentido. Vault Obsidian como contexto pessoal. Em planejamento detalhado, ainda não iniciado.</p>
+          <div class="proj-meta">
+            <span class="stack"><span class="stack-label">stack:</span>Python · Claude API · Whisper · ChromaDB · MCP</span>
+            <span class="status">· fase de plano · gate de início definido</span>
+          </div>
+        </article>
+
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3 class="proj-name">Bot de trading cripto</h3>
+            <span class="proj-role paused">pausado · case de método</span>
+          </div>
+          <p class="proj-tagline">Testei 6 hipóteses de trading rigorosamente, matei todas, parei no tempo certo.</p>
+          <p class="proj-desc">Engine em 3 camadas (técnica + ML + juiz LLM). 91 dias de walk-forward IS/OOS, 6 hipóteses estruturalmente diferentes refutadas. Pausado depois de provar que não havia edge no regime atual.</p>
+          <div class="proj-meta">
+            <span class="stack"><span class="stack-label">stack:</span>Python · ccxt · XGBoost · Claude API</span>
+            <span class="status">· 91 dias de walk-forward · 6 hipóteses refutadas · pausado por falta de edge</span>
+          </div>
+          <a class="proj-link" href="posts/bot-cripto.html">ler o post completo <span class="proj-link-arrow">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- writing -->
+    <section id="writing" class="wrap section">
+      <div class="reveal">
+        <div class="eyebrow">writing</div>
+        <h2 style="margin-bottom: 8px">Notas de campo.</h2>
+        <p style="margin-bottom: 28px; max-width: 580px">
+          Registro de decisões e pivots. O que funcionou, o que matei cedo, e o método.
+          Vai crescer aos poucos.
+        </p>
+      </div>
+
+      <div class="writing">
+        <a class="post reveal" href="posts/date-checklist.html">
+          <span class="post-date">2026-06-02</span>
+          <span class="post-title">Como lancei um SaaS do zero ao cobrando em dois dias</span>
+          <span class="post-arrow">→</span>
+        </a>
+        <a class="post reveal" href="posts/bot-cripto.html">
+          <span class="post-date">2026-05-25</span>
+          <span class="post-title">Como matei 6 hipóteses de trading cripto e parei no tempo certo</span>
+          <span class="post-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- experimentos -->
+    <section id="experimentos" class="wrap section">
+      <div class="reveal">
+        <div class="eyebrow">tempo livre, sem cliente</div>
+        <h2 style="margin-bottom: 8px">Experimentos.</h2>
+        <p style="margin-bottom: 28px; max-width: 580px">
+          Coisas que faço fora de projeto pra explorar técnica que não cabe no trabalho de cliente.
+          Não são produtos, são curiosidades. O que tá aqui abre e funciona. Se alguma te interessar, me chama.
+        </p>
+      </div>
+
+      <div class="proj-list">
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3 class="proj-name">Lab 3D</h3>
+            <span class="proj-role experiment">experimento · no ar</span>
+          </div>
+          <p class="proj-tagline">Os mesmos projetos daqui, mas como um grafo 3D que você orbita e explora.</p>
+          <p class="proj-desc">Releitura do portfólio em WebGL: cada projeto vira um nó flutuante no espaço, clica e a câmera voa até ele abrindo o detalhe. Estrelas, partículas, scanlines e som ambiente pra dar cara de visor, com resolução adaptativa que segura o FPS no mobile. Feito no tempo livre pra mexer com three.js a sério.</p>
+          <div class="proj-meta">
+            <span class="stack"><span class="stack-label">stack:</span>React · three.js · react-three-fiber · drei · Vite</span>
+            <span class="status">· no ar · feito no tempo livre</span>
+          </div>
+          <a class="proj-link" href="/lab/">abrir o lab <span class="proj-link-arrow">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- stack -->
+    <section class="wrap section">
+      <div class="reveal">
+        <div class="eyebrow">ferramentas afiadas, não religião</div>
+        <h2 style="margin-bottom: 8px">Stack atual.</h2>
+        <p style="margin-bottom: 28px; max-width: 580px">
+          Escolhida por contexto e dor real. Tudo aqui passou por uso de produção ou pesquisa séria.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <div class="stack-ribbon" style="flex-direction: column; gap: 14px">
+          <div class="group">
+            <span class="group-label">front</span>
+            <span class="item">TypeScript</span>
+            <span class="item">React</span>
+            <span class="item">Next.js</span>
+            <span class="item">Tailwind</span>
+          </div>
+          <div class="group">
+            <span class="group-label">back</span>
+            <span class="item">Python</span>
+            <span class="item">FastAPI</span>
+            <span class="item">Node.js</span>
+            <span class="item">Postgres</span>
+            <span class="item">Supabase</span>
+          </div>
+          <div class="group">
+            <span class="group-label">ia</span>
+            <span class="item">Claude API</span>
+            <span class="item">MCP servers</span>
+            <span class="item">embeddings locais</span>
+          </div>
+          <div class="group">
+            <span class="group-label">ops</span>
+            <span class="item">Docker</span>
+            <span class="item">GitHub Actions</span>
+            <span class="item">Vercel / Cloudflare</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- sobre -->
+    <section id="sobre" class="wrap section">
+      <div class="reveal">
+        <div class="eyebrow">sobre</div>
+        <h2 style="margin-bottom: 18px">Em uma frase.</h2>
+        <div class="about">
+          <p>
+            Dev full-stack do <strong>Rio de Janeiro</strong>, movido por uma regra simples:
+            <strong>o caminho mais curto até a coisa certa</strong>, sem pular o que importa.
+            Dedicado, aprendo com facilidade e gosto de problema técnico denso.
+          </p>
+          <p>
+            Foco atual: <strong>SaaS B2B</strong> e
+            <strong>sites com automação</strong> pra clientes. Entendo IA o suficiente
+            pra saber onde ela entra e onde não entra. Universitário em tecnologia,
+            com produto, cliente e código rodando.
+          </p>
+          <p>
+            Quando algo trava, prefiro entender antes de buscar solução pronta.
+            Quando a solução pronta é a certa, uso sem complicar.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- princípio operacional -->
+    <section class="wrap principle section">
+      <div class="reveal">
+        <div class="eyebrow">princípio operacional</div>
+        <p class="principle-quote">
+          <em>Rápido, sem pular o que importa.</em> Velocidade não vem de digitar rápido,
+          vem de cortar a decisão certa e recusar a que gera retrabalho. O que não dá pra cortar,
+          tipo <em>segurança, conformidade e o detalhe chato</em>, entra inteiro.
+        </p>
+        <p class="principle-body">
+          Por isso testo hipótese cedo, mato a que não tem edge, e escalo só o que fica de pé.
+          Refutar uma ideia ruim no papel é mais barato que descobrir ela quebrada em produção.
+        </p>
+      </div>
+    </section>
+
+    <!-- contato -->
+    <section id="contato" class="wrap section">
+      <div class="reveal">
+        <div class="eyebrow">contato</div>
+        <h2 style="margin-bottom: 18px">Aberto pra projeto com escopo claro.</h2>
+        <p style="margin-bottom: 24px; max-width: 580px">
+          Foco em <strong>site institucional</strong> (com captura de leads e automação),
+          <strong>SaaS B2B</strong> e <strong>automação com IA</strong>.
+          Escopo típico: 2 a 12 semanas. Prefiro conversa por email, LinkedIn ou WhatsApp.
+          Me diz o problema, contexto e prazo.
+        </p>
+        <div class="contact">
+          <div class="contact-line">
+            <span class="label">email</span>
+            <span class="val"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=guilhermedias.batista@gmail.com&amp;su=Contato%20pelo%20site&amp;body=Ol%C3%A1%20Guilherme%2C%0A%0A" target="_blank" rel="noopener">guilhermedias.batista@gmail.com</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="label">whatsapp</span>
+            <span class="val"><a href="https://wa.me/5521998822396" target="_blank" rel="noopener">+55 (21) 99882-2396</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="label">github</span>
+            <span class="val"><a href="https://github.com/gl-dias" target="_blank" rel="noopener">github.com/gl-dias</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="label">linkedin</span>
+            <span class="val"><a href="https://www.linkedin.com/in/guilherme-dias-838326241/" target="_blank" rel="noopener">linkedin.com/in/guilherme-dias</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="label">instagram</span>
+            <span class="val"><a href="https://instagram.com/_gl.dias" target="_blank" rel="noopener">@_gl.dias</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="label">localização</span>
+            <span class="val">Rio de Janeiro, BR · remoto</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <span>gl-dias.dev · 2026 · feito no editor, sem template</span>
+  </footer>
 </body>
 </html>

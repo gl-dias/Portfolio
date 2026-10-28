@@ -20,9 +20,6 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* anti-FOUC: esconde até o React montar (revelado no app.jsx) */
-#root { visibility: hidden; }
-
 /* foco visível pra navegação por teclado (acessibilidade) */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -399,13 +396,13 @@ p { color: var(--text-dim); }
 .footer a { color: var(--text-dim); border-bottom: 1px dotted var(--line-strong); }
 .footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* ---------- fade in ---------- */
-.fade-init { opacity: 0; transform: translateY(12px); }
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+/* ---------- reveal ----------
+   só esconde quando <html> tem .js (posta no <head> e retirada se o main.js não confirmar).
+   sem JS, ou com prefers-reduced-motion, tudo fica visível. */
+.js .reveal:not(.is-in) { opacity: 0; transform: translateY(8px); }
+.js .reveal {
+  transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ---------- scrollbar ---------- */
