@@ -332,6 +332,72 @@ p { color: var(--text-dim); }
   max-width: 620px;
 }
 
+/* ---------- cards completos (com miniatura) e compactos ---------- */
+.proj-full {
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 8px 28px;
+  align-items: start;
+}
+.proj-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.proj-body .proj-link { margin-top: 8px; }
+.proj-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--bg-elev);
+  margin-top: 4px;
+}
+.proj-stack {
+  margin-top: 6px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.proj-stack .stack-label { color: var(--text-faint); margin-right: 6px; }
+.proj-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.proj-chips li {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg-elev);
+}
+
+.proj-compact { gap: 6px; padding: 20px 0; }
+.proj-compact .proj-name { font-size: 16px; }
+.proj-compact .proj-tagline { color: var(--text-dim); font-size: 14.5px; }
+.proj-textlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: -8px 0 -12px;
+  width: fit-content;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-dim);
+  text-underline-offset: 4px;
+}
+.proj-textlink:hover { text-decoration-color: var(--accent); }
+
+@media (max-width: 639px) {
+  .proj-full { grid-template-columns: minmax(0, 1fr); }
+  .proj-thumb { order: -1; margin: 0 0 8px; }
+}
+
 /* ---------- writing list ---------- */
 .writing { display: flex; flex-direction: column; }
 .post {
