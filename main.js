@@ -50,3 +50,31 @@
     }
   });
 })();
+
+/* ---------- copiar email ---------- */
+(function () {
+  var btn = document.querySelector(".copy-btn");
+  var status = document.getElementById("copy-status");
+  if (!btn) return;
+
+  function done(msg) {
+    btn.textContent = msg;
+    if (status) status.textContent = msg === "copiado" ? "email copiado" : "";
+    setTimeout(function () {
+      btn.textContent = "copiar";
+      if (status) status.textContent = "";
+    }, 2000);
+  }
+
+  btn.addEventListener("click", function () {
+    var text = btn.getAttribute("data-copy");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function () { done("copiado"); },
+        function () { done("não rolou"); }
+      );
+    } else {
+      done("não rolou");
+    }
+  });
+})();

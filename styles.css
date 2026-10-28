@@ -554,6 +554,39 @@ p { color: var(--text-dim); }
 .contact-line .val a::before { content: ""; position: absolute; inset: -13px 0; }
 .contact-line .val a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
+.contact-sla {
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.btn-lg { min-height: 52px; padding: 12px 22px; border-radius: 9px; }
+.copy-status {   /* aviso só pra leitor de tela; o botão já mostra "copiado" */
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+/* lista de dados abaixo dos botões: secundária */
+.contact-line .val, .contact-line .val a { color: var(--text-dim); }
+
+/* botão copiar: só existe com JS (sem JS o mailto continua funcionando) */
+.copy-btn {
+  display: none;
+  position: relative;
+  margin-left: 10px;
+  padding: 3px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+  vertical-align: 1px;
+  transition: color 200ms, border-color 200ms;
+}
+.copy-btn::before { content: ""; position: absolute; inset: -9px -4px; }   /* toque de 44px */
+.copy-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
+.js .copy-btn { display: inline-block; }
+
 /* ---------- footer ---------- */
 .footer {
   padding: 36px 0 60px;
@@ -777,6 +810,7 @@ p { color: var(--text-dim); }
 
   .contact-line { grid-template-columns: 92px 1fr; }
   .contact-line .val { min-width: 0; }            /* deixa o email quebrar em vez de estourar */
+  .contact-actions .btn-lg { flex: 1 1 100%; justify-content: center; }
 
   .post-page { padding: 44px 22px 60px; }
   .post-content { font-size: 15px; }
