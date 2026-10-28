@@ -245,6 +245,14 @@ p { color: var(--text-dim); }
   color: var(--accent);
 }
 .btn-primary:hover { border-color: var(--accent); }
+/* ação principal (WhatsApp): preenchido */
+.btn-solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+.btn-solid:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); filter: brightness(1.08); }
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
@@ -339,17 +347,6 @@ p { color: var(--text-dim); }
   max-width: 620px;
   margin-top: 4px;
 }
-.proj-meta {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-  font-family: 'Geist Mono', monospace;
-  font-size: 13px;
-  color: var(--text-faint);
-}
-.proj-meta .stack { color: var(--text-dim); }
-.proj-meta .stack-label { color: var(--text-faint); margin-right: 4px; }
 
 /* ---------- project tagline (linha didática pra leigo) ---------- */
 .proj-tagline {
@@ -562,25 +559,37 @@ p { color: var(--text-dim); }
 .about a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
 /* ---------- contact ---------- */
-.contact { display: flex; flex-direction: column; gap: 14px; }
+.contact { display: flex; flex-direction: column; }
 .contact-line {
   display: grid;
   grid-template-columns: 110px 1fr;
   gap: 16px;
-  align-items: baseline;
+  align-items: center;
+  min-height: 44px;
   font-family: 'Geist Mono', monospace;
   font-size: 13px;
 }
 .contact-line .label { color: var(--text-faint); }
-.contact-line .val { color: var(--text); }
-.contact-line .val a {
-  color: var(--text);
-  border-bottom: 1px solid var(--line-strong);
-  position: relative;
+/* lista de dados abaixo dos botões: secundária */
+.contact-line .val {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 12px;
+  min-width: 0;
+  color: var(--text-dim);
 }
-/* área de toque de 44px sem mudar o visual */
-.contact-line .val a::before { content: ""; position: absolute; inset: -13px 0; }
-.contact-line .val a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.contact-line .val a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;          /* área de toque real de 44px */
+  color: var(--text-dim);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.contact-line .val a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 .contact-sla {
   font-family: 'Geist Mono', monospace;
@@ -588,32 +597,28 @@ p { color: var(--text-dim); }
   color: var(--accent);
   margin-bottom: 20px;
 }
-.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
 .btn-lg { min-height: 52px; padding: 12px 22px; border-radius: 9px; }
 .copy-status {   /* aviso só pra leitor de tela; o botão já mostra "copiado" */
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap;
 }
-/* lista de dados abaixo dos botões: secundária */
-.contact-line .val, .contact-line .val a { color: var(--text-dim); }
 
 /* botão copiar: só existe com JS (sem JS o mailto continua funcionando) */
 .copy-btn {
   display: none;
-  position: relative;
-  margin-left: 10px;
-  padding: 3px 10px;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
   border: 1px solid var(--line-strong);
-  border-radius: 5px;
+  border-radius: 6px;
   font-family: 'Geist Mono', monospace;
   font-size: 13px;
   color: var(--text-dim);
-  vertical-align: 1px;
   transition: color 200ms, border-color 200ms;
 }
-.copy-btn::before { content: ""; position: absolute; inset: -9px -4px; }   /* toque de 44px */
 .copy-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
-.js .copy-btn { display: inline-block; }
+.js .copy-btn { display: inline-flex; }
 
 /* ---------- footer ---------- */
 .footer {
@@ -865,7 +870,8 @@ p { color: var(--text-dim); }
   /* contato: label em cima, valor embaixo ocupando a largura toda */
   .contact-line {
     grid-template-columns: 1fr;
-    gap: 2px;
+    gap: 0;
   }
+  .contact-line + .contact-line { margin-top: 12px; }
 
 }
