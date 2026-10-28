@@ -398,6 +398,69 @@ p { color: var(--text-dim); }
   .proj-thumb { order: -1; margin: 0 0 8px; }
 }
 
+/* ---------- o que eu faço ---------- */
+.svc-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.svc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 18px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev);
+}
+.svc-title { font-size: 16px; color: var(--text); letter-spacing: -0.015em; line-height: 1.35; }
+.svc-desc { font-size: 14.5px; flex-grow: 1; }
+.svc-time {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  color: var(--text);
+}
+.svc-time-label { display: block; color: var(--text-faint); }
+.svc-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  width: fit-content;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  color: var(--accent);
+}
+.svc-link:hover { color: var(--text); }
+
+/* ---------- como a gente trabalha ---------- */
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 32px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 4px 12px;
+  align-items: baseline;
+}
+.step-num {
+  grid-row: span 2;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+}
+.step-title { font-size: 16px; color: var(--text); }
+.step-desc { font-size: 14.5px; }
+
+@media (max-width: 720px) {
+  .svc-list { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .steps { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+}
+
 /* ---------- writing list ---------- */
 .writing { display: flex; flex-direction: column; }
 .post {
