@@ -423,6 +423,35 @@ p { color: var(--text-dim); }
   .proj-thumb { order: -1; margin: 0 0 8px; }
 }
 
+/* ---------- zoom das miniaturas ----------
+   o main.js põe role="button" nas miniaturas e monta overlay + imagem grande no <body>. */
+.proj-thumb[role="button"] { cursor: zoom-in; }
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(10, 10, 11, 0.92);
+  opacity: 0;
+  cursor: zoom-out;
+  transition: opacity 300ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+.zoom-overlay.is-open { opacity: 1; }
+.zoom-img {
+  position: fixed;
+  z-index: 101;
+  display: block;
+  border-radius: 8px;
+  background: var(--bg-elev);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  cursor: zoom-out;
+  transform-origin: 0 0;
+  transition: transform 300ms cubic-bezier(0.2, 0, 0.2, 1),
+              border-radius 300ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .zoom-overlay, .zoom-img { transition: none; }
+}
+
 /* ---------- o que eu faço ---------- */
 .svc-list {
   display: grid;
