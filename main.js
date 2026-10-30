@@ -79,6 +79,25 @@
   });
 })();
 
+/* ---------- email abre no Gmail no computador ---------- */
+// mailto só funciona com app de email configurado, e no computador quase todo mundo usa o Gmail no navegador:
+// clicava e nada acontecia. No computador o link vira o "escrever" do Gmail já com destinatário e assunto;
+// no celular fica o mailto, que abre o app de email normalmente.
+(function () {
+  if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+    var parts = a.getAttribute("href").slice(7).split("?");
+    var subject = new URLSearchParams(parts[1] || "").get("subject");
+    var url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(parts[0]);
+    if (subject) url += "&su=" + encodeURIComponent(subject);
+
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+})();
+
 /* ---------- zoom nas miniaturas dos projetos ---------- */
 (function () {
   var thumbs = document.querySelectorAll(".proj-thumb[data-zoom-src]");
