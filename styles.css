@@ -365,6 +365,18 @@ p { color: var(--text-dim); }
 }
 .proj-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .proj-body .proj-link { margin-top: 8px; }
+.proj-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.proj-body .proj-links .proj-link { margin-top: 0; }
+.proj-link.ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--text-dim);
+}
+.proj-link.ghost:hover {
+  background: var(--accent-faint);
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
 .proj-thumb {
   display: block;
   width: 100%;
