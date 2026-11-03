@@ -1,0 +1,192 @@
+/* ============================================================
+   fios: palco da marionete
+   ============================================================ */
+
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/anton-latin.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/fonts/geist-mono-latin.woff2) format('woff2');
+}
+
+:root {
+  --bg: #0A0A0B;
+  --pink: #F2A5B5;
+  --text: #EDE9DF;
+  --text-dim: #A8A29A;
+  --gutter: clamp(18px, 3.2vw, 56px);
+  --mono: 'Geist Mono', ui-monospace, monospace;
+  --display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  /* a figura mora aqui nos dois modos, parado e animado; o fios.js lê estes valores */
+  --fig-bottom: 4svh;
+  --fig-h: min(80svh, 162vw);
+}
+
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; background: var(--bg); }
+body { overflow: hidden; color: var(--text); font-family: var(--mono); }
+
+.stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(46% 62% at 50% 58%, rgba(150, 40, 66, 0.3), transparent 74%), var(--bg);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* só o contorno: a palavra vira mais um desenho de linhas atrás do boneco */
+.word {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--display);
+  font-size: min(58vw, 104svh);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(242, 165, 181, 0.42);
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.still {
+  position: absolute;
+  left: 50%;
+  bottom: var(--fig-bottom);
+  height: var(--fig-h);
+  aspect-ratio: 823 / 1407;
+  transform: translateX(-50%);
+}
+.still img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.still-threads {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  stroke: rgba(255, 232, 238, 0.7);
+  stroke-width: 1;
+}
+.still-threads line { vector-effect: non-scaling-stroke; }
+
+/* com JS e movimento, o canvas assume; o fios.js tira o .js se não houver WebGL */
+.layer { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .layer { display: block; }
+  .js .still {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    aspect-ratio: auto;
+  }
+}
+
+.back {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: var(--gutter);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: max(8px, env(safe-area-inset-top));
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: rgba(237, 233, 223, 0.35);
+  text-underline-offset: 4px;
+}
+.back:hover { color: var(--pink); }
+
+.hint {
+  position: absolute;
+  z-index: 1;
+  left: var(--gutter);
+  bottom: max(20px, env(safe-area-inset-bottom));
+  display: none;
+  max-width: 44vw;
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 44px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--pink);
+  transition: opacity 400ms;
+  pointer-events: none;
+}
+.is-live .hint { display: block; }
+.hint.is-out { opacity: 0; }
+
+.controls {
+  position: absolute;
+  z-index: 2;
+  top: max(8px, env(safe-area-inset-top));
+  right: var(--gutter);
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.is-live .controls { display: flex; }
+.control {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(237, 233, 223, 0.28);
+  border-radius: 4px;
+  background: rgba(10, 10, 11, 0.72);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 160ms, border-color 160ms, background 160ms;
+}
+.control:hover:not(:disabled) { color: var(--pink); border-color: var(--pink); }
+.control:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.control:disabled { opacity: 0.5; cursor: default; }
+.control-cage.is-next { background: var(--pink); border-color: var(--pink); color: #0A0A0B; }
+.control-cage.is-next:hover:not(:disabled) { color: #0A0A0B; }
+
+.word span { display: inline-block; transform-origin: 50% 0; }
+.is-live .word span { will-change: transform; }
+
+.credit {
+  position: absolute;
+  z-index: 1;
+  right: var(--gutter);
+  bottom: max(20px, env(safe-area-inset-bottom));
+  max-width: 26ch;
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: right;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+/* no celular o texto fica embaixo e o boneco sobe pra não ficar em cima dele */
+@media (max-width: 720px) {
+  :root { --fig-bottom: 104px; --fig-h: min(calc(100svh - 104px - 11svh), 150vw); }
+  /* a palavra sobe pra trás da cabeça, senão o boneco cobre quase tudo */
+  .word { top: 52px; transform: translateX(-50%); font-size: 60vw; }
+  .credit { max-width: 28ch; font-size: 11px; text-wrap: balance; }
+}
