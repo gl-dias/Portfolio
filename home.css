@@ -563,6 +563,7 @@
   border: 1px dashed var(--line-strong);
   border-radius: 6px;
 }
+.lab + .lab { margin-top: clamp(16px, 2vw, 32px); }
 .lab .case-head { margin-bottom: clamp(18px, 2.4vw, 36px); align-items: center; }
 .lab .proj-role { margin-bottom: 0; }
 .lab .case-mini-name { font-size: clamp(30px, 3.4vw, 56px); }
