@@ -25,6 +25,137 @@
   window.__revealReady = true;
 })();
 
+/* ---------- placar: plaquinhas que viram no hero e no quadro de status ---------- */
+// O texto de verdade já está no HTML (é o que leitor de tela e quem não tem JS recebem);
+// as plaquinhas são só desenho por cima, com aria-hidden.
+(function () {
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || !document.documentElement.animate) return;
+
+  var LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var FLIP_MS = 120;
+  var STEP_MS = 75;
+  var STAGGER_MS = 32;
+  var HOLD_MS = 2800;
+
+  function makeCell() {
+    var el = document.createElement("span");
+    el.className = "flap-cell";
+    var glyphs = ["flap-top", "flap-bottom", "flap-top flap-leaf", "flap-bottom flap-leaf"].map(function (cls) {
+      var half = document.createElement("span");
+      half.className = "flap-half " + cls;
+      var glyph = document.createElement("b");
+      half.appendChild(glyph);
+      el.appendChild(half);
+      return glyph;
+    });
+    return { el: el, top: glyphs[0], bottom: glyphs[1], leafTop: glyphs[2], leafBottom: glyphs[3], ch: " " };
+  }
+
+  function build(container) {
+    var total = parseInt(container.getAttribute("data-cells"), 10);
+    var cells = [];
+    for (var i = 0; i < total; i++) {
+      var cell = makeCell();
+      container.appendChild(cell.el);
+      cells.push(cell);
+    }
+    return cells;
+  }
+
+  function flip(cell, next) {
+    var prev = cell.ch;
+    cell.ch = next;
+    cell.top.textContent = next;      // atrás da folha de cima já está a letra nova
+    cell.bottom.textContent = prev;   // a metade de baixo só muda quando a folha pousa
+    cell.leafTop.textContent = prev;
+    cell.leafBottom.textContent = next;
+    cell.leafTop.parentNode.animate(
+      [{ transform: "rotateX(0deg)" }, { transform: "rotateX(-90deg)" }],
+      { duration: FLIP_MS / 2, easing: "ease-in", fill: "both" }
+    );
+    cell.leafBottom.parentNode.animate(
+      [{ transform: "rotateX(90deg)" }, { transform: "rotateX(0deg)" }],
+      { duration: FLIP_MS / 2, delay: FLIP_MS / 2, easing: "ease-out", fill: "both" }
+    );
+  }
+
+  function roll(cell, target, delay) {
+    if (cell.ch === target) return;
+    var flips = 3 + Math.floor(Math.random() * 3);
+    for (var i = 1; i <= flips; i++) {
+      (function (step) {
+        setTimeout(function () {
+          flip(cell, step === flips ? target : LETTERS.charAt(Math.floor(Math.random() * LETTERS.length)));
+        }, delay + STEP_MS * step);
+      })(i);
+    }
+  }
+
+  function show(cells, word, startDelay) {
+    var text = word.toLocaleUpperCase("pt-BR");
+    cells.forEach(function (cell, i) {
+      roll(cell, text.charAt(i) || " ", startDelay + i * STAGGER_MS);
+    });
+  }
+
+  /* hero: troca de palavra em loop, só enquanto ele está na tela */
+  var hero = document.querySelector(".flap-hero");
+  if (hero) {
+    var heroCells = build(hero);
+    var words = hero.getAttribute("data-words").split("|");
+    var current = 0;
+    var heroVisible = true;
+    var timer = null;
+
+    var next = function () {
+      timer = null;
+      if (!heroVisible || document.hidden) return;
+      current = (current + 1) % words.length;
+      show(heroCells, words[current], 0);
+      schedule();
+    };
+    var schedule = function () {
+      if (timer === null) timer = setTimeout(next, HOLD_MS + heroCells.length * STAGGER_MS);
+    };
+
+    show(heroCells, words[0], 150);
+    schedule();
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        heroVisible = entries[0].isIntersecting;
+        if (heroVisible) schedule();
+      }).observe(hero);
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) schedule();
+    });
+  }
+
+  /* quadro: cada status vira uma vez, quando o quadro entra na tela */
+  var board = document.querySelector(".board");
+  if (board) {
+    var rows = [];
+    board.querySelectorAll(".flap-status").forEach(function (container) {
+      rows.push({ cells: build(container), word: container.getAttribute("data-word") });
+    });
+    var fill = function () {
+      rows.forEach(function (row, i) { show(row.cells, row.word, i * 120); });
+    };
+    if ("IntersectionObserver" in window) {
+      var boardIo = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        boardIo.disconnect();
+        fill();
+      }, { rootMargin: "0px 0px -15% 0px" });
+      boardIo.observe(board);
+    } else {
+      fill();
+    }
+  }
+})();
+
 /* ---------- menu mobile ---------- */
 (function () {
   var nav = document.querySelector(".nav");

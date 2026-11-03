@@ -14,10 +14,12 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://gl-dias.pages.dev/" />
 
+  <link rel="preload" href="/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0A0B'/><circle cx='16' cy='16' r='5' fill='%23E8A040'/></svg>" />
 
@@ -56,7 +58,7 @@
   </script>
   <script src="main.js" defer></script>
 </head>
-<body>
+<body class="home">
   <nav class="nav" aria-label="principal">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
@@ -80,32 +82,38 @@
 
   <main>
     <!-- hero -->
-    <section class="hero wrap">
-      <div class="reveal">
+    <section class="poster">
+      <p class="poster-name"><span>Guilherme</span> <span>Dias</span></p>
+
+      <div class="poster-photo">
+        <img src="images/guilherme-800.webp" srcset="images/guilherme-520.webp 520w, images/guilherme-800.webp 800w" sizes="(max-width: 999px) 84vw, min(46vw, 78svh, 820px)" width="800" height="800" fetchpriority="high" decoding="async" alt="Guilherme Dias de óculos e moletom preto, olhando para o lado." />
+      </div>
+
+      <div class="poster-left">
         <div class="hero-tag">
           <span class="at">●</span>
           <span>guilherme dias batista</span>
           <span class="faint">·</span>
           <span>rio de janeiro</span>
         </div>
-      </div>
 
-      <div class="reveal">
-        <h1 class="hero-headline">
-          Construindo <em>SaaS B2B</em>, <em>sites</em> e <em>automações com IA</em>. Pelo caminho mais curto até a coisa certa.
+        <h1 class="poster-headline">
+          <span class="hl-static">Construindo <em>SaaS B2B</em>, <em>sites</em> e <em>automações com IA</em>. Pelo caminho mais curto até a coisa certa.</span>
+          <span class="hl-flip" aria-hidden="true">
+            <span class="hl-lead">Construindo</span>
+            <span class="flap flap-hero" data-words="SaaS B2B|sites|automações com IA" data-cells="17"></span>
+            <span class="hl-tail">Pelo caminho mais curto até a coisa certa.</span>
+          </span>
         </h1>
       </div>
 
-      <div class="reveal">
+      <div class="poster-right">
         <p class="hero-sub">
           Full-stack focado em produto. Faço <strong>SaaS B2B</strong>,
           <strong>sites pra clientes</strong> com captura de leads, e
           <strong>automações com IA</strong> onde ela faz sentido.
           Stack escolhida por contexto, não por hype.
         </p>
-      </div>
-
-      <div class="reveal">
         <div class="hero-actions">
           <a class="btn btn-solid" href="https://wa.me/5521998822396?text=Oi%20Guilherme%2C%20vim%20pelo%20site.%20Meu%20projeto%20%C3%A9..." target="_blank" rel="noopener">chamar no WhatsApp</a>
           <a class="btn" href="#projetos">ver projetos →</a>
@@ -114,344 +122,444 @@
     </section>
 
     <!-- projetos -->
-    <section id="projetos" class="wrap section">
-      <div class="reveal">
-        <div class="eyebrow">projetos selecionados</div>
-        <h2 style="margin-bottom: 8px">O que tenho em pé hoje.</h2>
-        <p style="margin-bottom: 28px; max-width: 580px">
-          Cada item tem papel, status e stack real. Sites de cliente aparecem aqui só
-          quando o cliente autoriza. Os outros tô tocando sozinho ou em parceria.
-        </p>
-      </div>
+    <section id="projetos" class="sec">
+      <div class="frame">
+        <header class="sec-head reveal">
+          <div class="eyebrow">projetos selecionados</div>
+          <h2 class="display">O que tenho em pé hoje.</h2>
+          <p class="sec-lede">
+            Cada item tem papel, status e stack real. Sites de cliente aparecem aqui só
+            quando o cliente autoriza. Os outros tô tocando sozinho ou em parceria.
+          </p>
+        </header>
 
-      <div class="proj-list">
-        <article class="proj proj-full reveal">
-          <div class="proj-body">
-            <div class="proj-head">
-              <h3 class="proj-name">Licitavo</h3>
+        <div class="board reveal">
+          <div class="board-labels" aria-hidden="true">
+            <span>nº</span>
+            <span>projeto</span>
+            <span>papel</span>
+            <span>status</span>
+          </div>
+          <ol class="board-list">
+            <li><a class="board-row" href="#p-licitavo">
+              <span class="board-num">01</span>
+              <span class="board-name">Licitavo</span>
+              <span class="board-kind">produto próprio</span>
+              <span class="board-status is-wip"><span class="board-led"></span><span class="board-status-text">pré-lançamento</span><span class="flap flap-status" aria-hidden="true" data-word="pré-lançamento" data-cells="14"></span></span>
+            </a></li>
+            <li><a class="board-row" href="#p-cauri">
+              <span class="board-num">02</span>
+              <span class="board-name">Cauri</span>
+              <span class="board-kind">projeto pessoal</span>
+              <span class="board-status is-live"><span class="board-led"></span><span class="board-status-text">em uso</span><span class="flap flap-status" aria-hidden="true" data-word="em uso" data-cells="14"></span></span>
+            </a></li>
+            <li><a class="board-row" href="#p-lfg">
+              <span class="board-num">03</span>
+              <span class="board-name">Site LFG Tech</span>
+              <span class="board-kind">freela</span>
+              <span class="board-status is-live"><span class="board-led"></span><span class="board-status-text">no ar</span><span class="flap flap-status" aria-hidden="true" data-word="no ar" data-cells="14"></span></span>
+            </a></li>
+            <li><a class="board-row" href="#p-datechecklist">
+              <span class="board-num">04</span>
+              <span class="board-name">Date Checklist</span>
+              <span class="board-kind">produto próprio</span>
+              <span class="board-status is-live"><span class="board-led"></span><span class="board-status-text">cobrando</span><span class="flap flap-status" aria-hidden="true" data-word="cobrando" data-cells="14"></span></span>
+            </a></li>
+            <li><a class="board-row" href="#p-barbieri">
+              <span class="board-num">05</span>
+              <span class="board-name">Site Prof. Luiz Barbieri</span>
+              <span class="board-kind">freela</span>
+              <span class="board-status is-live"><span class="board-led"></span><span class="board-status-text">no ar</span><span class="flap flap-status" aria-hidden="true" data-word="no ar" data-cells="14"></span></span>
+            </a></li>
+            <li><a class="board-row" href="#p-bot">
+              <span class="board-num">06</span>
+              <span class="board-name">Bot de trading cripto</span>
+              <span class="board-kind">case de método</span>
+              <span class="board-status is-paused"><span class="board-led"></span><span class="board-status-text">pausado</span><span class="flap flap-status" aria-hidden="true" data-word="pausado" data-cells="14"></span></span>
+            </a></li>
+            <li><a class="board-row" href="#p-dias">
+              <span class="board-num">07</span>
+              <span class="board-name">Dias</span>
+              <span class="board-kind">pessoal</span>
+              <span class="board-status is-planned"><span class="board-led"></span><span class="board-status-text">planejado</span><span class="flap flap-status" aria-hidden="true" data-word="planejado" data-cells="14"></span></span>
+            </a></li>
+          </ol>
+        </div>
+
+        <div class="cases">
+          <article class="case reveal" id="p-licitavo">
+            <div class="case-head">
+              <h3 class="case-name">Licitavo</h3>
               <span class="proj-role lead">produto próprio · pré-lançamento</span>
             </div>
-            <p class="proj-tagline">SaaS que encontra licitações públicas e diz se vale a pena entrar.</p>
-            <p class="proj-desc">Plataforma pra ME/EPP e consultores monitorarem licitações do Brasil inteiro a partir do PNCP, com mais de 400 mil editais na base. Cada edital ganha um selo “Vale entrar” ou “Provavelmente não”, com score e fatores explicáveis (aderência ao perfil, prazo, valor, benefício ME/EPP, concorrência), calculado em regras determinísticas; a IA só escreve o resumo e o produto funciona inteiro sem ela. Inclui inteligência competitiva: perfil de compras do órgão, concorrentes, série histórica e banco de preços homologados.</p>
-            <p class="proj-stack"><span class="stack-label">stack:</span>Next.js · FastAPI · Supabase (Postgres + Auth) · Docker · VPS · Claude API</p>
-            <ul class="proj-chips">
-              <li>pré-lançamento</li>
-              <li>em parceria</li>
-              <li>go/no-go explicável</li>
-            </ul>
-            <a class="proj-link" href="https://licitavo.com.br" target="_blank" rel="noopener">visitar o produto <span class="proj-link-arrow">↗</span></a>
-          </div>
-          <img class="proj-thumb" src="images/projetos/licitavo-480.webp" data-zoom-src="images/projetos/licitavo-1440.webp" srcset="images/projetos/licitavo-480.webp 480w, images/projetos/licitavo-640.webp 640w, images/projetos/licitavo-800.webp 800w" sizes="(max-width: 639px) calc(100vw - 36px), 240px" width="480" height="300" loading="lazy" decoding="async" alt="Página inicial do Licitavo: logo, slogan “achou, licitou, venceu.” e o contador de editais monitorados via PNCP." />
-        </article>
+            <div class="case-grid">
+              <div class="case-media">
+                <img class="proj-thumb" src="images/projetos/licitavo-800.webp" data-zoom-src="images/projetos/licitavo-1440.webp" srcset="images/projetos/licitavo-640.webp 640w, images/projetos/licitavo-800.webp 800w, images/projetos/licitavo-1440.webp 1440w" sizes="(max-width: 999px) calc(100vw - 36px), 56vw" width="1440" height="900" loading="lazy" decoding="async" alt="Página inicial do Licitavo: logo, slogan “achou, licitou, venceu.” e o contador de editais monitorados via PNCP." />
+              </div>
+              <div class="case-body">
+                <p class="case-tagline">SaaS que encontra licitações públicas e diz se vale a pena entrar.</p>
+                <p class="case-desc">Plataforma pra ME/EPP e consultores monitorarem licitações do Brasil inteiro a partir do PNCP, com mais de 400 mil editais na base. Cada edital ganha um selo “Vale entrar” ou “Provavelmente não”, com score e fatores explicáveis (aderência ao perfil, prazo, valor, benefício ME/EPP, concorrência), calculado em regras determinísticas; a IA só escreve o resumo e o produto funciona inteiro sem ela. Inclui inteligência competitiva: perfil de compras do órgão, concorrentes, série histórica e banco de preços homologados.</p>
+                <p class="case-stack"><span class="stack-label">stack:</span>Next.js · FastAPI · Supabase (Postgres + Auth) · Docker · VPS · Claude API</p>
+                <ul class="chips">
+                  <li>pré-lançamento</li>
+                  <li>em parceria</li>
+                  <li>go/no-go explicável</li>
+                </ul>
+                <a class="proj-link" href="https://licitavo.com.br" target="_blank" rel="noopener">visitar o produto <span class="proj-link-arrow">↗</span></a>
+              </div>
+            </div>
+          </article>
 
-        <article class="proj proj-full reveal">
-          <div class="proj-body">
-            <div class="proj-head">
-              <h3 class="proj-name">Cauri</h3>
+          <article class="case reveal" id="p-cauri">
+            <div class="case-head">
+              <h3 class="case-name">Cauri</h3>
               <span class="proj-role lead">projeto pessoal · em uso</span>
             </div>
-            <p class="proj-tagline">Carteira de investimentos que junta tudo num lugar, compara com o CDI e aceita lançamento por voz.</p>
-            <p class="proj-desc">Junta ações, FIIs, ETFs, Tesouro, renda fixa e cripto numa carteira só e mostra a rentabilidade de verdade, descontando aportes, ao lado do que o mesmo dinheiro teria rendido no CDI. As operações entram pela planilha da corretora (B3, Binance ou qualquer uma, com as colunas mapeadas uma vez) ou por uma frase falada, tipo “comprei 3 petrobras”. A IA só entende a frase: achar o ticker, perguntar se é PETR3 ou PETR4 e conferir o saldo é código determinístico e testado, e nada é gravado sem confirmação. As regras da carteira ficam no próprio banco, e cada pessoa só enxerga o que é dela. Uso com alguns amigos convidados; a demo é aberta, com preços reais atualizados todo dia útil.</p>
-            <p class="proj-stack"><span class="stack-label">stack:</span>Python · FastAPI · Supabase (Postgres + RLS) · React · Claude API · Whisper · Cloudflare Pages · VPS</p>
-            <ul class="proj-chips">
-              <li>em uso</li>
-              <li>código aberto</li>
-              <li>demo com dados reais</li>
-            </ul>
-            <div class="proj-links">
-              <a class="proj-link" href="https://cauri.com.br/demo" target="_blank" rel="noopener">abrir a demo <span class="proj-link-arrow">↗</span></a>
-              <a class="proj-link ghost" href="https://github.com/gl-dias/Cauri" target="_blank" rel="noopener">ver o código <span class="proj-link-arrow">↗</span></a>
+            <div class="case-grid">
+              <div class="case-media">
+                <img class="proj-thumb" src="images/projetos/cauri-800.webp" data-zoom-src="images/projetos/cauri-1440.webp" srcset="images/projetos/cauri-640.webp 640w, images/projetos/cauri-800.webp 800w, images/projetos/cauri-1440.webp 1440w" sizes="(max-width: 999px) calc(100vw - 36px), 56vw" width="1440" height="900" loading="lazy" decoding="async" alt="Tela inicial da demo do Cauri: patrimônio total, rentabilidade pelo método de cotas, resultado contra o CDI e gráfico da evolução do patrimônio mês a mês." />
+              </div>
+              <div class="case-body">
+                <p class="case-tagline">Carteira de investimentos que junta tudo num lugar, compara com o CDI e aceita lançamento por voz.</p>
+                <p class="case-desc">Junta ações, FIIs, ETFs, Tesouro, renda fixa e cripto numa carteira só e mostra a rentabilidade de verdade, descontando aportes, ao lado do que o mesmo dinheiro teria rendido no CDI. As operações entram pela planilha da corretora (B3, Binance ou qualquer uma, com as colunas mapeadas uma vez) ou por uma frase falada, tipo “comprei 3 petrobras”. A IA só entende a frase: achar o ticker, perguntar se é PETR3 ou PETR4 e conferir o saldo é código determinístico e testado, e nada é gravado sem confirmação. As regras da carteira ficam no próprio banco, e cada pessoa só enxerga o que é dela. Uso com alguns amigos convidados; a demo é aberta, com preços reais atualizados todo dia útil.</p>
+                <p class="case-stack"><span class="stack-label">stack:</span>Python · FastAPI · Supabase (Postgres + RLS) · React · Claude API · Whisper · Cloudflare Pages · VPS</p>
+                <ul class="chips">
+                  <li>em uso</li>
+                  <li>código aberto</li>
+                  <li>demo com dados reais</li>
+                </ul>
+                <div class="proj-links">
+                  <a class="proj-link" href="https://cauri.com.br/demo" target="_blank" rel="noopener">abrir a demo <span class="proj-link-arrow">↗</span></a>
+                  <a class="proj-link ghost" href="https://github.com/gl-dias/Cauri" target="_blank" rel="noopener">ver o código <span class="proj-link-arrow">↗</span></a>
+                </div>
+              </div>
             </div>
-          </div>
-          <img class="proj-thumb" src="images/projetos/cauri-480.webp" data-zoom-src="images/projetos/cauri-1440.webp" srcset="images/projetos/cauri-480.webp 480w, images/projetos/cauri-640.webp 640w, images/projetos/cauri-800.webp 800w" sizes="(max-width: 639px) calc(100vw - 36px), 240px" width="480" height="300" loading="lazy" decoding="async" alt="Tela inicial da demo do Cauri: patrimônio total, rentabilidade pelo método de cotas, resultado contra o CDI e gráfico da evolução do patrimônio mês a mês." />
-        </article>
+          </article>
 
-        <article class="proj proj-full reveal">
-          <div class="proj-body">
-            <div class="proj-head">
-              <h3 class="proj-name">Site LFG Tech</h3>
+          <article class="case reveal" id="p-lfg">
+            <div class="case-head">
+              <h3 class="case-name">Site LFG Tech</h3>
               <span class="proj-role client">freela · entregue</span>
             </div>
-            <p class="proj-tagline">Site institucional pra consultoria de dados e IA, com demos de produto recriadas no próprio HTML.</p>
-            <p class="proj-desc">Site da LFG Tech, consultoria de BI, engenharia de dados e IA no Rio. Feito em dupla. Página única com as soluções, cases em produção recriados como telas interativas (dashboards e o chat da LFG IA no WhatsApp) e conversão direto pro WhatsApp com mensagem pronta. SEO técnico completo (JSON-LD, sitemap, 404 real), skip link e respeito a prefers-reduced-motion. Carrega em menos de meio segundo. No ar.</p>
-            <p class="proj-stack"><span class="stack-label">stack:</span>HTML/CSS · JS</p>
-            <ul class="proj-chips">
-              <li>entregue</li>
-              <li>no ar</li>
-              <li>em dupla</li>
-            </ul>
-            <a class="proj-link" href="https://lfgtech.com.br/" target="_blank" rel="noopener">visitar site <span class="proj-link-arrow">↗</span></a>
-          </div>
-          <img class="proj-thumb" src="images/projetos/lfgtech-480.webp" data-zoom-src="images/projetos/lfgtech-1440.webp" srcset="images/projetos/lfgtech-480.webp 480w, images/projetos/lfgtech-640.webp 640w, images/projetos/lfgtech-800.webp 800w" sizes="(max-width: 639px) calc(100vw - 36px), 240px" width="480" height="300" loading="lazy" decoding="async" alt="Página inicial da LFG Tech com a chamada “Sua empresa tem dados. Falta virar decisão.” e o botão de agendar diagnóstico." />
-        </article>
+            <div class="case-grid">
+              <div class="case-media">
+                <img class="proj-thumb" src="images/projetos/lfgtech-800.webp" data-zoom-src="images/projetos/lfgtech-1440.webp" srcset="images/projetos/lfgtech-640.webp 640w, images/projetos/lfgtech-800.webp 800w, images/projetos/lfgtech-1440.webp 1440w" sizes="(max-width: 999px) calc(100vw - 36px), 56vw" width="1440" height="900" loading="lazy" decoding="async" alt="Página inicial da LFG Tech com a chamada “Sua empresa tem dados. Falta virar decisão.” e o botão de agendar diagnóstico." />
+              </div>
+              <div class="case-body">
+                <p class="case-tagline">Site institucional pra consultoria de dados e IA, com demos de produto recriadas no próprio HTML.</p>
+                <p class="case-desc">Site da LFG Tech, consultoria de BI, engenharia de dados e IA no Rio. Feito em dupla. Página única com as soluções, cases em produção recriados como telas interativas (dashboards e o chat da LFG IA no WhatsApp) e conversão direto pro WhatsApp com mensagem pronta. SEO técnico completo (JSON-LD, sitemap, 404 real), skip link e respeito a prefers-reduced-motion. Carrega em menos de meio segundo. No ar.</p>
+                <p class="case-stack"><span class="stack-label">stack:</span>HTML/CSS · JS</p>
+                <ul class="chips">
+                  <li>entregue</li>
+                  <li>no ar</li>
+                  <li>em dupla</li>
+                </ul>
+                <a class="proj-link" href="https://lfgtech.com.br/" target="_blank" rel="noopener">visitar site <span class="proj-link-arrow">↗</span></a>
+              </div>
+            </div>
+          </article>
 
-        <article class="proj proj-full reveal">
-          <div class="proj-body">
-            <div class="proj-head">
-              <h3 class="proj-name">Date Checklist</h3>
+          <article class="case reveal" id="p-datechecklist">
+            <div class="case-head">
+              <h3 class="case-name">Date Checklist</h3>
               <span class="proj-role lead">produto próprio · no ar</span>
             </div>
-            <p class="proj-tagline">SaaS pra casais montarem a lista de dates juntos, com pagamento de verdade.</p>
-            <p class="proj-desc">O casal monta junto a lista de dates que quer fazer, sorteia o próximo quando bate a dúvida e guarda cada um numa linha do tempo com fotos (feature paga, R$ 9,90 vitalício). Cada casal tem uma sala privada, atualizada em tempo real dos dois lados. Pagamento via Mercado Pago e exclusão de conta automatizada. No ar e cobrando.</p>
-            <p class="proj-stack"><span class="stack-label">stack:</span>React · Supabase · Postgres (RLS) · Cloudflare Pages · Mercado Pago</p>
-            <ul class="proj-chips">
-              <li>no ar</li>
-              <li>cobrando</li>
-              <li>multi-tenant</li>
-            </ul>
-            <a class="proj-link" href="https://datechecklist.com.br" target="_blank" rel="noopener">visitar o produto <span class="proj-link-arrow">↗</span></a>
-          </div>
-          <img class="proj-thumb" src="images/projetos/datechecklist-480.webp" data-zoom-src="images/projetos/datechecklist-1440.webp" srcset="images/projetos/datechecklist-480.webp 480w, images/projetos/datechecklist-640.webp 640w, images/projetos/datechecklist-800.webp 800w" sizes="(max-width: 639px) calc(100vw - 36px), 240px" width="480" height="300" loading="lazy" decoding="async" alt="Página inicial do Date Checklist com a chamada “a lista de dates de vocês, num só lugar” e os cards de sala privada e checklist em tempo real." />
-        </article>
+            <div class="case-grid">
+              <div class="case-media">
+                <img class="proj-thumb" src="images/projetos/datechecklist-800.webp" data-zoom-src="images/projetos/datechecklist-1440.webp" srcset="images/projetos/datechecklist-640.webp 640w, images/projetos/datechecklist-800.webp 800w, images/projetos/datechecklist-1440.webp 1440w" sizes="(max-width: 999px) calc(100vw - 36px), 56vw" width="1440" height="900" loading="lazy" decoding="async" alt="Página inicial do Date Checklist com a chamada “a lista de dates de vocês, num só lugar” e os cards de sala privada e checklist em tempo real." />
+              </div>
+              <div class="case-body">
+                <p class="case-tagline">SaaS pra casais montarem a lista de dates juntos, com pagamento de verdade.</p>
+                <p class="case-desc">O casal monta junto a lista de dates que quer fazer, sorteia o próximo quando bate a dúvida e guarda cada um numa linha do tempo com fotos (feature paga, R$ 9,90 vitalício). Cada casal tem uma sala privada, atualizada em tempo real dos dois lados. Pagamento via Mercado Pago e exclusão de conta automatizada. No ar e cobrando.</p>
+                <p class="case-stack"><span class="stack-label">stack:</span>React · Supabase · Postgres (RLS) · Cloudflare Pages · Mercado Pago</p>
+                <ul class="chips">
+                  <li>no ar</li>
+                  <li>cobrando</li>
+                  <li>multi-tenant</li>
+                </ul>
+                <a class="proj-link" href="https://datechecklist.com.br" target="_blank" rel="noopener">visitar o produto <span class="proj-link-arrow">↗</span></a>
+              </div>
+            </div>
+          </article>
 
-        <article class="proj proj-full reveal">
-          <div class="proj-body">
-            <div class="proj-head">
-              <h3 class="proj-name">Site Prof. Luiz Barbieri</h3>
+          <article class="case reveal" id="p-barbieri">
+            <div class="case-head">
+              <h3 class="case-name">Site Prof. Luiz Barbieri</h3>
               <span class="proj-role client">freela · entregue</span>
             </div>
-            <p class="proj-tagline">Site profissional pra consultor de cursos, com captura automática de leads.</p>
-            <p class="proj-desc">Quem chega no site conhece os cursos do Prof. Luiz Barbieri e, ao deixar o contato, recebe os materiais na hora, sem ele precisar responder um por um. Site institucional com páginas de cursos e captura de leads. No ar.</p>
-            <p class="proj-stack"><span class="stack-label">stack:</span>HTML/CSS · JS · Apps Script · Sheets como CMS</p>
-            <ul class="proj-chips">
-              <li>entregue</li>
-              <li>no ar</li>
-            </ul>
-            <a class="proj-link" href="https://barbiericonsulting.pages.dev/" target="_blank" rel="noopener">visitar site <span class="proj-link-arrow">↗</span></a>
-          </div>
-          <img class="proj-thumb" src="images/projetos/barbieri-480.webp" data-zoom-src="images/projetos/barbieri-1440.webp" srcset="images/projetos/barbieri-480.webp 480w, images/projetos/barbieri-640.webp 640w, images/projetos/barbieri-800.webp 800w" sizes="(max-width: 639px) calc(100vw - 36px), 240px" width="480" height="300" loading="lazy" decoding="async" alt="Página inicial da Barbieri Consulting com a chamada “Processos, pessoas e IA aplicada ao seu negócio” e foto do Prof. Luiz Barbieri." />
-        </article>
+            <div class="case-grid">
+              <div class="case-media">
+                <img class="proj-thumb" src="images/projetos/barbieri-800.webp" data-zoom-src="images/projetos/barbieri-1440.webp" srcset="images/projetos/barbieri-640.webp 640w, images/projetos/barbieri-800.webp 800w, images/projetos/barbieri-1440.webp 1440w" sizes="(max-width: 999px) calc(100vw - 36px), 56vw" width="1440" height="900" loading="lazy" decoding="async" alt="Página inicial da Barbieri Consulting com a chamada “Processos, pessoas e IA aplicada ao seu negócio” e foto do Prof. Luiz Barbieri." />
+              </div>
+              <div class="case-body">
+                <p class="case-tagline">Site profissional pra consultor de cursos, com captura automática de leads.</p>
+                <p class="case-desc">Quem chega no site conhece os cursos do Prof. Luiz Barbieri e, ao deixar o contato, recebe os materiais na hora, sem ele precisar responder um por um. Site institucional com páginas de cursos e captura de leads. No ar.</p>
+                <p class="case-stack"><span class="stack-label">stack:</span>HTML/CSS · JS · Apps Script · Sheets como CMS</p>
+                <ul class="chips">
+                  <li>entregue</li>
+                  <li>no ar</li>
+                </ul>
+                <a class="proj-link" href="https://barbiericonsulting.pages.dev/" target="_blank" rel="noopener">visitar site <span class="proj-link-arrow">↗</span></a>
+              </div>
+            </div>
+          </article>
 
-        <article class="proj proj-compact reveal">
-          <div class="proj-head">
-            <h3 class="proj-name">Bot de trading cripto</h3>
-            <span class="proj-role paused">pausado · case de método</span>
-          </div>
-          <p class="proj-tagline">Testei 6 hipóteses de trading rigorosamente, matei todas, parei no tempo certo.</p>
-          <a class="proj-textlink" href="posts/bot-cripto">ler o post completo</a>
-        </article>
+          <div class="case-minis">
+            <article class="case-mini reveal" id="p-bot">
+              <h3 class="case-mini-name">Bot de trading cripto</h3>
+              <span class="proj-role paused">pausado · case de método</span>
+              <p class="case-mini-tagline">Testei 6 hipóteses de trading rigorosamente, matei todas, parei no tempo certo.</p>
+              <a class="proj-textlink" href="posts/bot-cripto">ler o post completo</a>
+            </article>
 
-        <article class="proj proj-compact reveal">
-          <div class="proj-head">
-            <h3 class="proj-name">Dias</h3>
-            <span class="proj-role draft">pessoal · planejado</span>
+            <article class="case-mini reveal" id="p-dias">
+              <h3 class="case-mini-name">Dias</h3>
+              <span class="proj-role draft">pessoal · planejado</span>
+              <p class="case-mini-tagline">Assistente pessoal por voz que conversa e executa tarefas no computador.</p>
+            </article>
           </div>
-          <p class="proj-tagline">Assistente pessoal por voz que conversa e executa tarefas no computador.</p>
-        </article>
+        </div>
       </div>
     </section>
 
     <!-- o que eu faço -->
-    <section id="servicos" class="wrap section">
-      <div class="reveal">
-        <div class="eyebrow">o que eu faço</div>
-        <h2 style="margin-bottom: 28px">Três formatos, com escopo claro.</h2>
+    <section id="servicos" class="sec sec-paper">
+      <div class="frame">
+        <header class="sec-head reveal">
+          <div class="eyebrow">o que eu faço</div>
+          <h2 class="display">Três formatos, com escopo claro.</h2>
+        </header>
+
+        <div class="svc-rows">
+          <article class="svc-row reveal">
+            <h3 class="svc-title">Site institucional com captura de leads</h3>
+            <p class="svc-desc">Site rápido, com formulário e envio automático de materiais, leads caindo numa planilha ou CRM.</p>
+            <p class="svc-time"><span class="svc-time-label">prazo típico:</span> 2 a 4 semanas</p>
+            <a class="svc-link" href="#contato">conversar sobre isso →</a>
+          </article>
+
+          <article class="svc-row reveal">
+            <h3 class="svc-title">SaaS e sistemas sob medida</h3>
+            <p class="svc-desc">Do login ao pagamento, com painel, permissões e dados seguros.</p>
+            <p class="svc-time"><span class="svc-time-label">prazo típico:</span> 6 a 12 semanas</p>
+            <a class="svc-link" href="#contato">conversar sobre isso →</a>
+          </article>
+
+          <article class="svc-row reveal">
+            <h3 class="svc-title">Automação com IA</h3>
+            <p class="svc-desc">Tarefas repetitivas viram fluxo automático, com IA só onde ela resolve.</p>
+            <p class="svc-time"><span class="svc-time-label">prazo típico:</span> 2 a 6 semanas</p>
+            <a class="svc-link" href="#contato">conversar sobre isso →</a>
+          </article>
+        </div>
+
+        <!-- como a gente trabalha -->
+        <div id="processo" class="process">
+          <header class="sec-head reveal">
+            <div class="eyebrow">como a gente trabalha</div>
+            <h2 class="display">Do primeiro papo ao deploy.</h2>
+          </header>
+
+          <ol class="steps">
+            <li class="step reveal">
+              <span class="step-num" aria-hidden="true">01</span>
+              <h3 class="step-title">Conversa</h3>
+              <p class="step-desc">Call de 30 minutos pra entender o problema, o contexto e o prazo.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step-num" aria-hidden="true">02</span>
+              <h3 class="step-title">Proposta</h3>
+              <p class="step-desc">Escopo, prazo e valor por escrito. Sem surpresa no meio.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step-num" aria-hidden="true">03</span>
+              <h3 class="step-title">Construção</h3>
+              <p class="step-desc">Entregas em partes, com link de preview pra você acompanhar.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step-num" aria-hidden="true">04</span>
+              <h3 class="step-title">Entrega</h3>
+              <p class="step-desc">Deploy, ajustes finais e suporte depois do lançamento.</p>
+            </li>
+          </ol>
+        </div>
       </div>
-
-      <div class="svc-list">
-        <article class="svc reveal">
-          <h3 class="svc-title">Site institucional com captura de leads</h3>
-          <p class="svc-desc">Site rápido, com formulário e envio automático de materiais, leads caindo numa planilha ou CRM.</p>
-          <p class="svc-time"><span class="svc-time-label">prazo típico:</span> 2 a 4 semanas</p>
-          <a class="svc-link" href="#contato">conversar sobre isso →</a>
-        </article>
-
-        <article class="svc reveal">
-          <h3 class="svc-title">SaaS e sistemas sob medida</h3>
-          <p class="svc-desc">Do login ao pagamento, com painel, permissões e dados seguros.</p>
-          <p class="svc-time"><span class="svc-time-label">prazo típico:</span> 6 a 12 semanas</p>
-          <a class="svc-link" href="#contato">conversar sobre isso →</a>
-        </article>
-
-        <article class="svc reveal">
-          <h3 class="svc-title">Automação com IA</h3>
-          <p class="svc-desc">Tarefas repetitivas viram fluxo automático, com IA só onde ela resolve.</p>
-          <p class="svc-time"><span class="svc-time-label">prazo típico:</span> 2 a 6 semanas</p>
-          <a class="svc-link" href="#contato">conversar sobre isso →</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- como a gente trabalha -->
-    <section id="processo" class="wrap section">
-      <div class="reveal">
-        <div class="eyebrow">como a gente trabalha</div>
-        <h2 style="margin-bottom: 28px">Do primeiro papo ao deploy.</h2>
-      </div>
-
-      <ol class="steps">
-        <li class="step reveal">
-          <span class="step-num" aria-hidden="true">01</span>
-          <h3 class="step-title">Conversa</h3>
-          <p class="step-desc">Call de 30 minutos pra entender o problema, o contexto e o prazo.</p>
-        </li>
-        <li class="step reveal">
-          <span class="step-num" aria-hidden="true">02</span>
-          <h3 class="step-title">Proposta</h3>
-          <p class="step-desc">Escopo, prazo e valor por escrito. Sem surpresa no meio.</p>
-        </li>
-        <li class="step reveal">
-          <span class="step-num" aria-hidden="true">03</span>
-          <h3 class="step-title">Construção</h3>
-          <p class="step-desc">Entregas em partes, com link de preview pra você acompanhar.</p>
-        </li>
-        <li class="step reveal">
-          <span class="step-num" aria-hidden="true">04</span>
-          <h3 class="step-title">Entrega</h3>
-          <p class="step-desc">Deploy, ajustes finais e suporte depois do lançamento.</p>
-        </li>
-      </ol>
     </section>
 
     <!-- notas -->
-    <section id="notas" class="wrap section">
-      <div class="reveal">
-        <div class="eyebrow">notas</div>
-        <h2 style="margin-bottom: 8px">Notas de campo.</h2>
-        <p style="margin-bottom: 28px; max-width: 580px">
-          Registro de decisões e pivots. O que funcionou, o que matei cedo, e o método.
-          Vai crescer aos poucos.
-        </p>
-      </div>
+    <section id="notas" class="sec">
+      <div class="frame">
+        <header class="sec-head reveal">
+          <div class="eyebrow">notas</div>
+          <h2 class="display">Notas de campo.</h2>
+          <p class="sec-lede">
+            Registro de decisões e pivots. O que funcionou, o que matei cedo, e o método.
+            Vai crescer aos poucos.
+          </p>
+        </header>
 
-      <div class="writing">
-        <a class="post reveal" href="posts/date-checklist">
-          <span class="post-date">2026-06-02</span>
-          <span class="post-title">Como lancei um SaaS do zero ao cobrando em dois dias</span>
-          <span class="post-arrow">→</span>
-        </a>
-        <a class="post reveal" href="posts/bot-cripto">
-          <span class="post-date">2026-05-25</span>
-          <span class="post-title">Como matei 6 hipóteses de trading cripto e parei no tempo certo</span>
-          <span class="post-arrow">→</span>
-        </a>
+        <div class="writing">
+          <a class="post reveal" href="posts/date-checklist">
+            <span class="post-date">2026-06-02</span>
+            <span class="post-title">Como lancei um SaaS do zero ao cobrando em dois dias</span>
+            <span class="post-arrow">→</span>
+          </a>
+          <a class="post reveal" href="posts/bot-cripto">
+            <span class="post-date">2026-05-25</span>
+            <span class="post-title">Como matei 6 hipóteses de trading cripto e parei no tempo certo</span>
+            <span class="post-arrow">→</span>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- experimentos -->
-    <section id="experimentos" class="wrap section">
-      <div class="reveal">
-        <div class="eyebrow">tempo livre, sem cliente</div>
-        <h2 style="margin-bottom: 8px">Experimentos.</h2>
-        <p style="margin-bottom: 28px; max-width: 580px">
-          Coisas que faço fora de projeto pra explorar técnica que não cabe no trabalho de cliente.
-          Não são produtos, são curiosidades. O que tá aqui abre e funciona. Se alguma te interessar, me chama.
-        </p>
-      </div>
+    <section id="experimentos" class="sec sec-tight">
+      <div class="frame">
+        <header class="sec-head reveal">
+          <div class="eyebrow">tempo livre, sem cliente</div>
+          <h2 class="display">Experimentos.</h2>
+          <p class="sec-lede">
+            Coisas que faço fora de projeto pra explorar técnica que não cabe no trabalho de cliente.
+            Não são produtos, são curiosidades. O que tá aqui abre e funciona. Se alguma te interessar, me chama.
+          </p>
+        </header>
 
-      <div class="proj-list">
-        <article class="proj reveal">
-          <div class="proj-head">
-            <h3 class="proj-name">Lab 3D</h3>
+        <article class="lab reveal">
+          <div class="case-head">
+            <h3 class="case-mini-name">Lab 3D</h3>
             <span class="proj-role experiment">experimento · no ar</span>
           </div>
-          <p class="proj-tagline">Os mesmos projetos daqui, mas como um grafo 3D que você orbita e explora.</p>
-          <p class="proj-desc">Releitura do portfólio em WebGL: cada projeto vira um nó flutuante no espaço, clica e a câmera voa até ele abrindo o detalhe. Estrelas, partículas, scanlines e som ambiente pra dar cara de visor, com resolução adaptativa que segura o FPS no mobile. Feito no tempo livre pra mexer com three.js a sério.</p>
-          <p class="proj-stack"><span class="stack-label">stack:</span>React · three.js · react-three-fiber · drei · Vite</p>
-          <ul class="proj-chips">
-            <li>no ar</li>
-            <li>feito no tempo livre</li>
-          </ul>
-          <a class="proj-link" href="/lab/">abrir o lab</a>
+          <div class="case-grid">
+            <div class="case-media">
+              <img class="proj-thumb" src="images/projetos/lab-800.webp" data-zoom-src="images/projetos/lab-1440.webp" srcset="images/projetos/lab-640.webp 640w, images/projetos/lab-800.webp 800w, images/projetos/lab-1440.webp 1440w" sizes="(max-width: 999px) calc(100vw - 76px), 52vw" width="1440" height="900" loading="lazy" decoding="async" alt="Lab 3D: núcleo roxo no centro de um grafo, com os projetos do site orbitando em volta." />
+            </div>
+            <div class="case-body">
+              <p class="case-tagline">Os mesmos projetos daqui, mas como um grafo 3D que você orbita e explora.</p>
+              <p class="case-desc">Releitura do portfólio em WebGL: cada projeto vira um nó flutuante no espaço, clica e a câmera voa até ele abrindo o detalhe. Estrelas, partículas, scanlines e som ambiente pra dar cara de visor, com resolução adaptativa que segura o FPS no mobile. Feito no tempo livre pra mexer com three.js a sério.</p>
+              <p class="case-stack"><span class="stack-label">stack:</span>React · three.js · react-three-fiber · drei · Vite</p>
+              <ul class="chips">
+                <li>no ar</li>
+                <li>feito no tempo livre</li>
+              </ul>
+              <a class="proj-link" href="/lab/">abrir o lab</a>
+            </div>
+          </div>
         </article>
       </div>
     </section>
 
     <!-- stack -->
-    <section class="wrap section">
-      <div class="reveal">
-        <div class="eyebrow">ferramentas afiadas, não religião</div>
-        <h2 style="margin-bottom: 8px">Stack atual.</h2>
-        <p style="margin-bottom: 28px; max-width: 580px">
-          Escolhida por contexto e dor real. Tudo aqui passou por uso de produção ou pesquisa séria.
-        </p>
-      </div>
+    <section class="sec sec-tight">
+      <div class="frame">
+        <header class="sec-head reveal">
+          <div class="eyebrow">ferramentas afiadas, não religião</div>
+          <h2 class="display">Stack atual.</h2>
+          <p class="sec-lede">
+            Escolhida por contexto e dor real. Tudo aqui passou por uso de produção ou pesquisa séria.
+          </p>
+        </header>
 
-      <div class="reveal">
-        <div class="stack-ribbon" style="flex-direction: column; gap: 14px">
-          <div class="group">
+        <div class="stack-rows reveal">
+          <div class="stack-row">
             <span class="group-label">front</span>
-            <span class="item">TypeScript</span>
-            <span class="item">React</span>
-            <span class="item">Next.js</span>
-            <span class="item">Tailwind</span>
+            <div class="stack-items">
+              <span class="item">TypeScript</span>
+              <span class="item">React</span>
+              <span class="item">Next.js</span>
+              <span class="item">Tailwind</span>
+            </div>
           </div>
-          <div class="group">
+          <div class="stack-row">
             <span class="group-label">back</span>
-            <span class="item">Python</span>
-            <span class="item">FastAPI</span>
-            <span class="item">Node.js</span>
-            <span class="item">Postgres</span>
-            <span class="item">Supabase</span>
+            <div class="stack-items">
+              <span class="item">Python</span>
+              <span class="item">FastAPI</span>
+              <span class="item">Node.js</span>
+              <span class="item">Postgres</span>
+              <span class="item">Supabase</span>
+            </div>
           </div>
-          <div class="group">
+          <div class="stack-row">
             <span class="group-label">ia</span>
-            <span class="item">Claude API</span>
-            <span class="item">MCP servers</span>
-            <span class="item">embeddings locais</span>
+            <div class="stack-items">
+              <span class="item">Claude API</span>
+              <span class="item">MCP servers</span>
+              <span class="item">embeddings locais</span>
+            </div>
           </div>
-          <div class="group">
+          <div class="stack-row">
             <span class="group-label">ops</span>
-            <span class="item">Docker</span>
-            <span class="item">GitHub Actions</span>
-            <span class="item">Vercel / Cloudflare</span>
+            <div class="stack-items">
+              <span class="item">Docker</span>
+              <span class="item">GitHub Actions</span>
+              <span class="item">Vercel / Cloudflare</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- sobre -->
-    <section id="sobre" class="wrap section">
-      <div class="reveal">
-        <div class="eyebrow">sobre</div>
-        <h2 style="margin-bottom: 18px">Sobre mim.</h2>
-        <div class="about">
-          <p>
-            Dev full-stack do <strong>Rio de Janeiro</strong>, movido por uma regra simples:
-            <strong>o caminho mais curto até a coisa certa</strong>, sem pular o que importa.
-            Dedicado, aprendo com facilidade e gosto de problema técnico denso.
-          </p>
-          <p>
-            Foco atual: <strong>SaaS B2B</strong> e
-            <strong>sites com automação</strong> pra clientes. Entendo IA o suficiente
-            pra saber onde ela entra e onde não entra. Engenharia de Software no Ibmec RJ, 7º período,
-            com produto, cliente e código rodando.
-          </p>
-          <p>
-            Quando algo trava, prefiro entender antes de buscar solução pronta.
-            Quando a solução pronta é a certa, uso sem complicar.
-          </p>
+    <section id="sobre" class="sec sec-paper">
+      <div class="frame about-grid">
+        <div class="about-media reveal">
+          <img src="images/sobre-900.webp" srcset="images/sobre-600.webp 600w, images/sobre-900.webp 900w" sizes="(max-width: 999px) calc(100vw - 36px), 42vw" width="900" height="850" loading="lazy" decoding="async" alt="Guilherme de camiseta branca, sentado num barco em frente à mata, com a bandeira do Brasil ao fundo." />
+        </div>
+        <div class="reveal">
+          <div class="eyebrow">sobre</div>
+          <h2 class="display">Sobre mim.</h2>
+          <div class="about">
+            <p>
+              Dev full-stack do <strong>Rio de Janeiro</strong>, movido por uma regra simples:
+              <strong>o caminho mais curto até a coisa certa</strong>, sem pular o que importa.
+              Dedicado, aprendo com facilidade e gosto de problema técnico denso.
+            </p>
+            <p>
+              Foco atual: <strong>SaaS B2B</strong> e
+              <strong>sites com automação</strong> pra clientes. Entendo IA o suficiente
+              pra saber onde ela entra e onde não entra. Engenharia de Software no Ibmec RJ, 7º período,
+              com produto, cliente e código rodando.
+            </p>
+            <p>
+              Quando algo trava, prefiro entender antes de buscar solução pronta.
+              Quando a solução pronta é a certa, uso sem complicar.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- princípio operacional -->
-    <section class="wrap principle section">
-      <div class="reveal">
+    <section class="sec sec-amber">
+      <div class="frame reveal">
         <div class="eyebrow">princípio operacional</div>
-        <p class="principle-quote">
-          <em>Rápido, sem pular o que importa.</em> Velocidade não vem de digitar rápido,
-          vem de cortar a decisão certa e recusar a que gera retrabalho. O que não dá pra cortar,
-          tipo <em>segurança, conformidade e o detalhe chato</em>, entra inteiro.
-        </p>
-        <p class="principle-body">
-          Por isso testo hipótese cedo, mato a que não tem edge, e escalo só o que fica de pé.
-          Refutar uma ideia ruim no papel é mais barato que descobrir ela quebrada em produção.
-        </p>
+        <p class="principle-big">Rápido, sem pular o que importa.</p>
+        <div class="principle-cols">
+          <p class="principle-quote">
+            Velocidade não vem de digitar rápido,
+            vem de cortar a decisão certa e recusar a que gera retrabalho. O que não dá pra cortar,
+            tipo <em>segurança, conformidade e o detalhe chato</em>, entra inteiro.
+          </p>
+          <p class="principle-body">
+            Por isso testo hipótese cedo, mato a que não tem edge, e escalo só o que fica de pé.
+            Refutar uma ideia ruim no papel é mais barato que descobrir ela quebrada em produção.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- contato -->
-    <section id="contato" class="wrap section">
-      <div class="reveal">
+    <section id="contato" class="sec">
+      <div class="frame reveal">
         <div class="eyebrow">contato</div>
-        <h2 style="margin-bottom: 10px">Aberto pra projeto com escopo claro.</h2>
+        <h2 class="display display-xl">Aberto pra projeto com escopo claro.</h2>
         <p class="contact-sla">Respondo em até 24h.</p>
         <div class="contact-actions">
           <a class="btn btn-solid btn-lg" href="https://wa.me/5521998822396?text=Oi%20Guilherme%2C%20vim%20pelo%20site.%20Meu%20projeto%20%C3%A9..." target="_blank" rel="noopener">chamar no WhatsApp</a>
           <a class="btn btn-lg" href="mailto:guilhermedias.batista@gmail.com?subject=Contato%20pelo%20site">enviar email</a>
         </div>
-        <p style="margin-bottom: 20px; max-width: 580px">Me diz o problema, contexto e prazo.</p>
+        <p class="contact-hint">Me diz o problema, contexto e prazo.</p>
         <div class="contact">
           <div class="contact-line">
             <span class="label">email</span>
@@ -482,7 +590,7 @@
     </section>
   </main>
 
-  <footer class="wrap footer">
+  <footer class="site-footer frame">
     <span>gl-dias.dev · 2026 · feito no editor, sem template</span>
   </footer>
 </body>
