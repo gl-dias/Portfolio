@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retícula · Guilherme Dias</title>
+  <meta name="description" content="Qualquer foto vira tinta de mangá em tempo real: preto, branco e um vermelho chapado. Experimento em WebGL puro, e a foto não sai do navegador." />
+  <link rel="canonical" href="https://gl-dias.pages.dev/reticula/" />
+  <link rel="preload" href="/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/reticula/reticula.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0A0B'/><circle cx='16' cy='16' r='5' fill='%23DE1B15'/></svg>" />
+  <script>document.documentElement.className = "js";</script>
+</head>
+<body>
+  <main class="pagina">
+    <header class="cabeca">
+      <a class="voltar" href="/#experimentos">
+        <svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true"><path d="M5 1 1 5l4 4M1 5h14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        Voltar pro site
+      </a>
+      <h1>Retícula</h1>
+      <p class="lede">
+        Uma foto vira tinta de mangá na hora: preto, branco e um vermelho chapado.
+        <span class="so-mouse">Passe o mouse em cima e a cor original volta em volta do cursor.</span>
+        <span class="so-toque">Encoste o dedo na imagem e a cor original volta em volta dele.</span>
+      </p>
+    </header>
+
+    <figure class="palco" id="palco">
+      <img class="parada" id="parada" src="/reticula/img/oculos-tinta.webp" width="1000" height="1245"
+           alt="Guilherme de óculos e moletom, de perfil, com o céu em vermelho chapado e o resto em preto e branco." />
+      <canvas class="tela" id="tela" tabindex="0" role="img"
+              aria-label="Guilherme de óculos e moletom, de perfil, com o céu em vermelho chapado e o resto em preto e branco."></canvas>
+      <figcaption class="legenda" id="legenda"></figcaption>
+      <p class="dica" id="dica" aria-hidden="true">
+        <span class="so-mouse">Passe o mouse</span>
+        <span class="so-toque">Encoste e arraste</span>
+      </p>
+    </figure>
+
+    <section class="controles" aria-label="Controles">
+      <noscript>
+        <p class="nota-parada">Sem JavaScript fica só esta imagem já processada. Com ele ligado, a imagem reage ao cursor e aceita a sua foto.</p>
+      </noscript>
+      <p class="nota-parada" id="nota-webgl">Este navegador não liberou WebGL, então você vê uma versão parada, já processada. O envio de foto precisa de WebGL.</p>
+
+      <div class="so-js">
+        <h2 class="rotulo">Imagem</h2>
+        <div class="fotos">
+          <button class="tile" type="button" data-foto="oculos" aria-pressed="true">
+            <img src="/reticula/img/oculos-mini.webp" width="240" height="240" alt="" loading="lazy" />
+            <span>Óculos</span>
+          </button>
+          <button class="tile" type="button" data-foto="barco" aria-pressed="false">
+            <img src="/reticula/img/barco-mini.webp" width="240" height="240" alt="" loading="lazy" />
+            <span>Barco</span>
+          </button>
+          <button class="tile" type="button" data-foto="doflamingo" aria-pressed="false">
+            <img src="/reticula/img/doflamingo-mini.webp" width="240" height="240" alt="" loading="lazy" />
+            <span>Doflamingo (gerada com IA)</span>
+          </button>
+          <div class="tile tile-upload" id="tile-upload">
+            <input class="arquivo" type="file" id="sua-foto" accept="image/*" />
+            <label for="sua-foto">
+              <span class="mais" aria-hidden="true"></span>
+              <span>Sua foto</span>
+            </label>
+          </div>
+        </div>
+        <p class="privado"><strong>Sua foto não sai do navegador.</strong> Ela é processada aqui no seu aparelho, não é enviada pra lugar nenhum e some quando você fecha a página.</p>
+        <p class="aviso" id="aviso" role="status"></p>
+
+        <div class="so-gl">
+          <h2 class="rotulo">O vermelho cai em</h2>
+          <div class="matizes">
+            <button type="button" data-matiz="vermelhos" aria-pressed="false">Vermelhos</button>
+            <button type="button" data-matiz="amarelos" aria-pressed="false">Amarelos</button>
+            <button type="button" data-matiz="verdes" aria-pressed="false">Verdes</button>
+            <button type="button" data-matiz="azuis" aria-pressed="false">Azuis</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="rodape">Um shader fazendo conta em cada pixel, sem ilustrador: parece retícula e hachura, não desenho à mão. WebGL puro, sem biblioteca.</p>
+    </section>
+  </main>
+  <script src="/reticula/reticula.js"></script>
+</body>
+</html>
